@@ -11,6 +11,10 @@ import java.io.File;
 import java.util.Scanner;
 import java.awt.event.ActionEvent;
 import java.awt.Window.Type;
+import java.awt.Color;
+import java.awt.SystemColor;
+import java.awt.Panel;
+import javax.swing.ImageIcon;
 
 public class Login {
 
@@ -49,32 +53,36 @@ public class Login {
 	 */
 		private void initialize() {
 		frmTestsystemLogin = new JFrame();
+		frmTestsystemLogin.getContentPane().setBackground(Color.WHITE);
 		frmTestsystemLogin.setTitle("StudentChallenger Login");
-		frmTestsystemLogin.setBounds(200, 100, 500, 300);
+		frmTestsystemLogin.setBounds(200, 100, 453, 665);
 		frmTestsystemLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTestsystemLogin.getContentPane().setLayout(null);
 		frmTestsystemLogin.setLocationRelativeTo(null); // center okna do stredu 
 
-		JLabel lblMeno = new JLabel("Meno");
-		lblMeno.setBounds(23, 29, 46, 14);
+		JLabel lblMeno = new JLabel("PRIHLASOVACIE MENO:");
+		lblMeno.setBounds(75, 386, 136, 14);
 		frmTestsystemLogin.getContentPane().add(lblMeno);
 
-		JLabel lblHeslo = new JLabel("Heslo");
-		lblHeslo.setBounds(23, 67, 46, 14);
+		JLabel lblHeslo = new JLabel("HESLO:");
+		lblHeslo.setBackground(new Color(255, 255, 255));
+		lblHeslo.setBounds(75, 446, 46, 14);
 		frmTestsystemLogin.getContentPane().add(lblHeslo);
 
 		txtMeno = new JTextField();
-		txtMeno.setBounds(79, 26, 136, 20);
+		txtMeno.setBounds(75, 400, 287, 35);
 		frmTestsystemLogin.getContentPane().add(txtMeno);
 		txtMeno.setColumns(10);
 
 		txtHeslo = new JPasswordField();
-		txtHeslo.setBounds(79, 64, 136, 20);
+		txtHeslo.setBounds(75, 460, 287, 35);
 		frmTestsystemLogin.getContentPane().add(txtHeslo);
 
 		
 		
-		JButton btnLogin = new JButton("Login"); //// Login Button
+		JButton btnLogin = new JButton("Prihlasit "); //// Login Button
+		btnLogin.setForeground(SystemColor.text);
+		btnLogin.setBackground(SystemColor.textHighlight);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
@@ -110,24 +118,8 @@ public class Login {
 
 			}
 		});
-		btnLogin.setBounds(23, 213, 89, 23);
+		btnLogin.setBounds(75, 516, 287, 45);
 		frmTestsystemLogin.getContentPane().add(btnLogin);
-
-		
-		
-		
-		/*
-		 * reset button (vymazanie txt poli)
-		 */
-		JButton btnReset = new JButton("Reset");
-		btnReset.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
-				txtMeno.setText(null);
-				txtHeslo.setText(null);
-			}
-		});
-		btnReset.setBounds(135, 213, 89, 23);
-		frmTestsystemLogin.getContentPane().add(btnReset);
 		
 		
 		
@@ -137,7 +129,9 @@ public class Login {
 		 * prepnutie do noveho okna Register
 		 * zatvorenie okna Login
 		 */
-		JButton btnRegister = new JButton("Register");
+		JButton btnRegister = new JButton("Registracia");
+		btnRegister.setForeground(SystemColor.text);
+		btnRegister.setBackground(SystemColor.textHighlight);
 		btnRegister.addActionListener(new ActionListener() {
 
 			public void actionPerformed(ActionEvent e) {
@@ -153,8 +147,17 @@ public class Login {
 
 			}
 		});
-		btnRegister.setBounds(247, 213, 89, 23);
+		btnRegister.setBounds(75, 562, 287, 45);
 		frmTestsystemLogin.getContentPane().add(btnRegister);
+		
+		Panel panel = new Panel();
+		panel.setBackground(Color.LIGHT_GRAY);
+		panel.setBounds(0, 0, 436, 331);
+		frmTestsystemLogin.getContentPane().add(panel);
+		
+		JLabel label = new JLabel("");
+		label.setIcon(new ImageIcon(Login.class.getResource("/obrazky/LoginLogo.jpg")));
+		panel.add(label);
 
 	}
 }
