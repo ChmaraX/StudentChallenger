@@ -1,39 +1,17 @@
 import java.awt.EventQueue;
-import java.awt.SystemColor;
-import java.awt.Toolkit;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JPasswordField;
-import javax.swing.JComboBox;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JCheckBox;
 import javax.swing.JButton;
-import javax.swing.JTextPane;
 import java.awt.event.ActionListener;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
-import javax.swing.UIManager;
-
-
 import java.awt.Panel;
 import javax.swing.ImageIcon;
 
-public class Register extends Controller{
+public class Register{
 
 	JFrame frmTestsystemRegister;
 	private JTextField txtRegMeno;
@@ -42,7 +20,7 @@ public class Register extends Controller{
 	private JTextField PriezviskoReg;
 	private JTextField VekReg;
 
-	
+	Controller controller = new Controller();
 	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
@@ -59,45 +37,8 @@ public class Register extends Controller{
 	}
 
 	
-	
-	
 	public Register() {
 		initialize();
-	}
-
-
-	
-	private void addStudent() throws FileNotFoundException, IOException, ClassNotFoundException {
-		
-		String password = txtRegHeslo.getText();
-		String username = txtRegMeno.getText();
-		String meno = MenoReg.getText(); 
-		String priezvisko = PriezviskoReg.getText(); 
-		int vek = Integer.parseInt(VekReg.getText());
-				
-		try {
-		    Files.write(Paths.get("loginData.txt"), username.getBytes(), StandardOpenOption.APPEND);
-		    Files.write(Paths.get("loginData.txt"), ",".getBytes(), StandardOpenOption.APPEND);
-		    Files.write(Paths.get("loginData.txt"), password.getBytes(), StandardOpenOption.APPEND);
-		    Files.write(Paths.get("loginData.txt"), "\n".getBytes(), StandardOpenOption.APPEND);
-		}catch (IOException e1) {
-		    //pre pripad nenajdenia txt suboru
-		}
-				
-	
-		List<Student> studenti = deserialize("studenti.ser"); 
-		studenti.add(new Student(vek, meno, priezvisko));
-		
-		// studenti.clear(); --- vycistenie db
-		
-		serialize(studenti,"studenti.ser");
-				
-		
-		List<Student> newList = deserialize("studenti.ser");
-		System.out.println("Novy list:  " + newList);
-	
-	   		
-	
 	}
 	
 	
@@ -158,44 +99,50 @@ public class Register extends Controller{
 		label_Stupen.setBounds(93, 477, 92, 14);
 		frmTestsystemRegister.getContentPane().add(label_Stupen);
 
-				
+					
+		
+							/* BUTTONS */
 			
 		JButton btnZaregistruj = new JButton("Zaregistruj");
-		btnZaregistruj.setForeground(SystemColor.text);
-		btnZaregistruj.setBackground(SystemColor.textHighlight);
+		btnZaregistruj.setBounds(75, 516, 287, 45);
+		frmTestsystemRegister.getContentPane().add(btnZaregistruj);
 		btnZaregistruj.addActionListener(new ActionListener() {
 			
 			public void actionPerformed(ActionEvent e) {
 				try {
-					addStudent();
+					
+					@SuppressWarnings("deprecation")
+					String password = txtRegHeslo.getText();
+					String username = txtRegMeno.getText();
+					String meno = MenoReg.getText(); 
+					String priezvisko = PriezviskoReg.getText(); 
+					int vek = Integer.parseInt(VekReg.getText());
+							
+					controller.addLogin(username,password); //prida prihlasovacie udaje studenta do txt
+					controller.addStudent(vek,meno,priezvisko); //prida a ulozi udaje studenta 
+					
 				} catch (ClassNotFoundException | IOException e1) {
-					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}	
-				}
+			}
+			
 		});
-		btnZaregistruj.setBounds(75, 516, 287, 45);
-		frmTestsystemRegister.getContentPane().add(btnZaregistruj);
+		
 
 		
-		
-		
 		JButton btnPrihlasenie = new JButton("Prihlasenie");
-		btnPrihlasenie.setForeground(SystemColor.text);
-		btnPrihlasenie.setBackground(SystemColor.textHighlight);
+		btnPrihlasenie.setBounds(75, 562, 287, 45);
+		frmTestsystemRegister.getContentPane().add(btnPrihlasenie);
 		btnPrihlasenie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login.main(null);
 				frmTestsystemRegister.setVisible(false);
 			}
 		});
-		btnPrihlasenie.setBounds(75, 562, 287, 45);
-		frmTestsystemRegister.getContentPane().add(btnPrihlasenie);
 		
 		
-		/*
-		 * Obrazok v log/reg
-		 */
+		
+	
 		Panel panelLogo = new Panel();
 		panelLogo.setBackground(Color.LIGHT_GRAY);
 		panelLogo.setBounds(0, 0, 436, 253);

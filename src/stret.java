@@ -14,15 +14,15 @@ public class stret {
 		
 		System.out.println(t[0].getNazov());
 		
-		t[0].pridajOtazku(new Otazka("Haha","hehe"));
-		t[0].pridajOtazku(new Otazka("Heeaha","hihi"));
+		t[0].pridajOtazku(new Otazka("1 Prva otazka","prva odpoved"));
+		t[0].pridajOtazku(new Otazka("2 Druha otazka","druha odpoved"));
 		
-		t[1].pridajOtazku(new Otazka("sadsd","dsads"));
-		t[1].pridajOtazku(new Otazka("qweqwe","asdsad"));
+		t[1].pridajOtazku(new Otazka("2 Prva","prva"));
+		t[1].pridajOtazku(new Otazka("2 Druha","druha"));
 		
 
-		System.out.println(t[0].startTest());
-		System.out.println(t[1].startTest());
+		t[0].startTest();
+		
 	
 		
 	}

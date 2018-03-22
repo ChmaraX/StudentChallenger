@@ -13,8 +13,7 @@ public class Test {
 		this.nazov = nazov;
 		}
 
-	
-	
+		
 	public Otazka getOtazka(int poradie) {
 	    return o[poradie]; 
 	}
@@ -35,10 +34,6 @@ public class Test {
 	}
 
 
-	public void setActScore(int actScore) {
-		this.actScore = actScore;
-	}
-
 
 	public void pridajOtazku(Otazka ot) {
 		o[pocetOtazok++] = ot;
@@ -46,12 +41,20 @@ public class Test {
 	}
 	  
 	
-	public String startTest() {
-		
-		Otazka ot = this.getOtazka(1);
-		return ot.getOtazka();
-		
-	}
+	public void startTest() {
+        for (int i = 0; i < this.pocetOtazok; i++) {
+            Otazka ot = this.o[i];
+            ot.polozOtazku();
+           
+            if(ot.userOdpoved())
+            	this.actScore += 1;          
+      
+        }
+        
+        System.out.println("Finalne skore: " + actScore + "/" + totalScore);
+        System.out.println("Nespravne odpovede: " + actScore + "/" + totalScore);
+       
+    }
 	
 	
 	
