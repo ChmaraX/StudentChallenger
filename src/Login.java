@@ -83,8 +83,11 @@ public class Login{
 				@SuppressWarnings("deprecation")
 				String password = txtHeslo.getText();
 				String username = txtMeno.getText();
-
-				controller.checkLogin(username,password);
+				
+					int idUser = controller.checkLogin(username,password);
+								stret.main(idUser);
+					
+				
 			}
 		});
 		

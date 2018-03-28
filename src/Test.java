@@ -1,10 +1,9 @@
 
 
-public class Test {
+public class Test implements Body {
 
-	private String nazov; 
-	private int totalScore; 
-	private int actScore = 0; 
+	private String nazov;
+	private int body;
 	private int pocetOtazok = 0;
 	private Otazka[] o = new Otazka[100]; // maximum otazok
 	
@@ -25,37 +24,44 @@ public class Test {
 	public String getNazov() {
 		return nazov;
 	}
-
-
-	public int getTotalScore() {
-		return totalScore;
+	
+	public int zistiBody() {
+		return body;
 	}
-
-
-	public int getActScore() {
-		return actScore;
+	
+	public void nastavBody(int body) {
+		this.body = body;
 	}
-
+	
+	public void znizBody(int body) {
+		this.body -= body;
+	}
+	
+	public void zvysBody(int body) {
+		this.body += body;
+	}
 
 
 	public void pridajOtazku(Otazka ot) {
 		o[pocetOtazok++] = ot;
-		this.totalScore++;
+		zvysBody(1);
 	}
 	
  
 	
-	public void startTest() {
+	public int startTest(int idUser) {
+		System.out.println(getNazov());
         for (int i = 0; i < this.pocetOtazok; i++) {
             Otazka ot = this.o[i];
             
-            if(ot.polozOtazku())
-            	this.actScore += 1;          
+            if(!ot.polozOtazku())
+            	znizBody(1);          
       
         }
+        /* kazda otazka je za defaultne za 1 bod -> max body = pocet otazok*/ 
+        System.out.println("Finalne skore: " + zistiBody() + "/" + pocetOtazok);
         
-        System.out.println("Finalne skore: " + actScore + "/" + totalScore);
-       
+       return zistiBody();
        
     }
 	

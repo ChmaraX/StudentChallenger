@@ -118,8 +118,7 @@ public class Register{
 					String priezvisko = PriezviskoReg.getText(); 
 					int vek = Integer.parseInt(VekReg.getText());
 							
-					controller.addLogin(username,password); //prida prihlasovacie udaje studenta do txt
-					controller.addStudent(vek,meno,priezvisko); //prida a ulozi udaje studenta 
+					controller.addStudent(username,password,vek,meno,priezvisko); //prida a ulozi udaje studenta 
 					
 				} catch (ClassNotFoundException | IOException e1) {
 					e1.printStackTrace();

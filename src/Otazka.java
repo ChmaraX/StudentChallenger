@@ -1,13 +1,15 @@
 import java.util.Scanner;
 
-public interface Otazka {
+public abstract class Otazka{
 
-		
+	public int maxBody;
+	public String otazka = "";
+	
 	Scanner scanner = new Scanner(System.in);	
 		
-	boolean polozOtazku();
+	abstract boolean polozOtazku();
 	
-	boolean userOdpoved();
+	abstract boolean userOdpoved();
 	
 	
 	

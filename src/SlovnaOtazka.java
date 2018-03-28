@@ -1,8 +1,8 @@
 import java.util.Objects;
 
-public class SlovnaOtazka implements Otazka {
+public class SlovnaOtazka extends Otazka {
 
-	private String otazka = ""; 
+	
 	private String odpoved = ""; 
 		
 	

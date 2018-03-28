@@ -1,33 +1,43 @@
 import java.io.Serializable;
-import java.util.Random;
 
-public class Student implements Serializable{
+
+public class Student implements Serializable, Body{
 	
 
 	private static final long serialVersionUID = 1L;
-	private int ID; 
+	private final String username;
+	private final String password;
 	private int vek; 
 	private String meno; 
 	private String priezvisko; 
 	private int body; 
+	private String[] odznaky;
+	private int hotStreak;
 	
 		
 	
-	public Student(int vek, String meno, String priezvisko) {
+	public Student(String username, String password, int vek, String meno, String priezvisko) {
 		super();
-		Random rand = new Random();
-		ID = rand.nextInt(100) + 1;
+		this.username = username;
+		this.password = password;
 		this.vek = vek;
 		this.meno = meno;
 		this.priezvisko = priezvisko;
-		this.body = 0; 
+		this.body = 0;
+		this.hotStreak = 0;
 	}
+		
 	
 
-	public int getID() {
-		return ID;
+	public String getUsername() {
+		return username;
 	}
-	
+
+
+	public String getPassword() {
+		return password;
+	}
+
 		
 	public int getVek() {
 		return vek;
@@ -43,15 +53,33 @@ public class Student implements Serializable{
 		return priezvisko;
 	}
 	
-
-
-	public int getBody() {
-		return body;
+	
+	public String[] getOdznaky() {
+		return odznaky;
 	}
 
 
-	public void setBody(int body) {
+	public int zistiBody() {
+		return body;
+	}
+	
+	
+	public void nastavBody(int body) {
 		this.body = body;
+	}
+	
+	
+	public void znizBody(int body) {
+		this.body -= body;
+	}
+	
+	
+	public void zvysBody(int body) {
+		this.body += body;
+	}
+	
+	public void zvysHotstreak() {
+		this.hotStreak++;
 	}
 	
 	

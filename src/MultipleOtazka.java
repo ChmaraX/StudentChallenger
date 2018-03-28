@@ -1,9 +1,8 @@
 import java.util.Arrays;
 import java.util.Objects;
 
-public class MultipleOtazka implements Otazka, Obtiaznost {
+public class MultipleOtazka extends Otazka {
 
-	private String otazka = "";
 	private String[] moznosti;
 	private int odpoved; 
 		
@@ -55,8 +54,6 @@ public class MultipleOtazka implements Otazka, Obtiaznost {
 		return false;
 	}
 	
-	public void lahka() {
-		
-	}
+	
 
 }
