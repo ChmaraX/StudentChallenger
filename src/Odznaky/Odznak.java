@@ -1,10 +1,14 @@
 package Odznaky;
+import java.io.Serializable;
+
 import main.Body;
 
-public class Odznak implements Body{
+public class Odznak implements Serializable,Body{
 
-private String nazov = "";
-private int body;
+
+	private static final long serialVersionUID = 1L;
+	private String nazov = "";
+	private int body;
 	
 
 	public Odznak(String nazov, int body) {

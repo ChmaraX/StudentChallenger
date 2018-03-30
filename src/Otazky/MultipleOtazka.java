@@ -1,9 +1,12 @@
 package Otazky;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class MultipleOtazka extends Otazka {
 
+
+	private static final long serialVersionUID = 1L;
 	private String[] moznosti;
 	private int odpoved; 
 		
@@ -47,7 +50,10 @@ public class MultipleOtazka extends Otazka {
 
 	@Override
 	public boolean userOdpoved() {
+		@SuppressWarnings("resource") // scanner nieje uzavrety
+		Scanner scanner = new Scanner(System.in);
 		Integer userInput = scanner.nextInt();
+		
 		
 		if( Objects.equals(getOdpoved(),userInput) ) 
 			return true;

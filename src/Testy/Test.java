@@ -1,9 +1,13 @@
 package Testy;
+import java.io.Serializable;
+
 import Otazky.Otazka;
 import main.Body;
 
-public class Test implements Body {
+public class Test implements Serializable,Body {
 
+	
+	private static final long serialVersionUID = 1L;
 	private String nazov;
 	private int body;
 	private int pocetOtazok = 0;

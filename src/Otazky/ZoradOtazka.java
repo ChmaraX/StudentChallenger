@@ -1,9 +1,12 @@
 package Otazky;
 import java.util.Arrays;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class ZoradOtazka extends Otazka{
 
+	
+	private static final long serialVersionUID = 1L;
 	private	String[] odpoved;
 	private int[] zoradenie; 
 		
@@ -49,13 +52,14 @@ public class ZoradOtazka extends Otazka{
 
 	@Override
 	public boolean userOdpoved() {
-		
+		@SuppressWarnings("resource") // scanner nieje uzavrety
+		Scanner scanner = new Scanner(System.in);
 		int pom = 0; 
 		for(int i = 0; i < odpoved.length; i++ ) {
 		
 			Integer[] userInput = new Integer[odpoved.length];
 			userInput[i] = scanner.nextInt();
-		
+			
 		if( Objects.equals(zoradenie[i],userInput[i]) ) 
 				pom++; 		
 		}

@@ -1,5 +1,6 @@
 package main;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import Odznaky.Odznak;
@@ -18,29 +19,30 @@ public class stret {
 		 * inicializacia potrebnych veci
 		 */
 		Controller controller = new Controller();
-		Test[] t = new Test[100];
+		List<Test> testy = controller.deserializeTest("testy.ser");
 		List<Student> studenti = controller.deserialize("studenti.ser"); 
-		Student actUser = studenti.get(idUser);
+		Student actUser = studenti.get(idUser); // priradenie prihlaseneho uzivatela
 		OdznakObserver odznakObserver = new OdznakObserver(actUser);
 		actUser.addObserver(odznakObserver);
 		
+		//controller.vytvorTest();
+		
+		
 				
-		System.out.println("Vitaj v StudentChallenger" + actUser.getMeno() + "!\n");
+		System.out.println("Vitaj v StudentChallenger  " + actUser.getMeno() + "!\n");
+		
+		//testy.get(7).startTest();
+		
 		
 		
 		//vytvorenie testu
-	
 		
-		t[0].pridajOtazku(new SlovnaOtazka("1 Prva otazka","prva odpoved"));
-		t[0].pridajOtazku(new SlovnaOtazka("1 Druha otazka","druha odpoved"));
-		t[0].pridajOtazku(new MultipleOtazka("1 Tretia otazka", new String[] {"nespravna","nespravna","spravna"},2));
-		t[0].pridajOtazku(new ZoradOtazka("Zorad od najmensieho", new String[] {"3","1","7","4"},new int[] {2,1,4,3} ));
 				
 		// start testu + pripocitanie bodov
 		
-		for(int j = 0; j < 3; j++) {
+		/*for(int j = 0; j < 3; j++) {
 			
-		int vysledok = t[0].startTest();				
+		int vysledok = testy.get(0).startTest();				
 		actUser.zvysBody(vysledok); 
 		actUser.zvysPocetTestov();
 		
@@ -53,7 +55,7 @@ public class stret {
 			actUser.zmazHotStreak(); */
 		
 			
-			System.out.println("Celkovy pocet bodov pre " + actUser.getUsername() + " je " + actUser.zistiBody());
+			/*System.out.println("Celkovy pocet bodov pre " + actUser.getUsername() + " je " + actUser.zistiBody());
 		}
 		
 		System.out.println(actUser.getMeno());
@@ -64,9 +66,9 @@ public class stret {
 		for(Odznak i : actUser.getOdznaky()){
 				if(i != null)
 			System.out.println(i.getNazov());
-			}
+			}*/
 		
-		
+		//controller.serialize(studenti, "studenti.ser");
 	
 		
 	}

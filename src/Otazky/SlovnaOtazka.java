@@ -1,9 +1,11 @@
 package Otazky;
 import java.util.Objects;
+import java.util.Scanner;
 
 public class SlovnaOtazka extends Otazka {
 
-	
+
+	private static final long serialVersionUID = 1L;
 	private String odpoved = ""; 
 		
 	
@@ -40,8 +42,10 @@ public class SlovnaOtazka extends Otazka {
 	
 	@Override
 	public boolean userOdpoved() {
+		@SuppressWarnings("resource")
+		Scanner scanner = new Scanner(System.in);
 		String userInput = scanner.nextLine();
-				/*
+			/*
 		 * Zisti ci sa uzivatelov vstup zhoduje
 		 * so spravnou odpovedou
 		 */
