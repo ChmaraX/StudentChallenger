@@ -5,11 +5,13 @@ import java.awt.EventQueue;
 import java.awt.Panel;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 
 import Odznaky.OdznakObserver;
 import Uzivatelia.Student;
 import main.Controller;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.util.List;
@@ -68,6 +70,10 @@ public class Main {
 		panel.setBounds(0, 0, 436, 331);
 		frmMain.getContentPane().add(panel);
 		
+		JLabel picture = new JLabel("");
+		picture.setIcon(new ImageIcon(TestGUI.class.getResource("/obrazky/Main.jpg")));
+		panel.add(picture);
+		
 		JButton btnTesty = new JButton("Testy");
 		btnTesty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -81,8 +87,8 @@ public class Main {
 		JButton btnProfil = new JButton("Profil");
 		btnProfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.ukazProfil(idUser);
-			}
+				Profil.main(idUser);
+				}
 		});
 		btnProfil.setBounds(75, 436, 287, 45);
 		frmMain.getContentPane().add(btnProfil);

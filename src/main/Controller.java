@@ -14,6 +14,7 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
+import GUI.Profil;
 import GUI.TestGUI;
 import Odznaky.Odznak;
 import Odznaky.OdznakObserver;
@@ -278,15 +279,14 @@ public class Controller {
 		List<Student> studenti = deserialize("studenti.ser"); 
 		Student actUser = studenti.get(idUser);
 		
-		System.out.println("Uzivatelske meno: " +  actUser.getUsername() + "\n");
-		System.out.println("Meno: " +  actUser.getMeno());
-		System.out.println("Priezvisko: " +  actUser.getPriezvisko());
-		System.out.println("Celkove body: " +  actUser.zistiBody());
-		System.out.println("Ziskane odznaky:");
-				
+		Profil.lblNickname.setText(actUser.getUsername());
+	    Profil.txtMeno.setText(actUser.getMeno());
+	    Profil.txtPriezvisko.setText(actUser.getPriezvisko());
+	    Profil.txtBody.setText(Integer.toString(actUser.zistiBody()));
+						
 		for(Odznak i : actUser.getOdznaky()){
 			if(i != null)
-		System.out.println(i.getNazov());
+				Profil.txtOdznaky.append(i.getNazov() + "\n");
 			}
 		
 	}
