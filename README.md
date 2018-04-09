@@ -9,6 +9,8 @@ Výsledkom tohto projektu bude softvér ktorý posilní motiváciu k štúdiu za
 
 <b>Info k programu (pracovná verzia)</b>
 
+<b>Login.java</b> je spustac celeho programu.
+
 Registracia -> login 
 Vytvorenie vlastneho uctu
 ( alebo ucet: admin/root )
