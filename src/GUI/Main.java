@@ -24,9 +24,8 @@ public class Main {
 	private int idUser;
 	Controller controller = new Controller();
 
-	/**
-	 * Launch the application.
-	 */
+	
+	
 	public static void main(int idUser) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -40,9 +39,8 @@ public class Main {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
+	
+	
 	public Main(int idUser) {
 		initialize();
 		this.idUser = idUser;
@@ -52,9 +50,8 @@ public class Main {
 		actUser.addObserver(odznakObserver);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	
+	
 	private void initialize() {
 		frmMain = new JFrame();
 		frmMain.setResizable(false);
@@ -74,6 +71,7 @@ public class Main {
 		picture.setIcon(new ImageIcon(TestGUI.class.getResource("/obrazky/Main.jpg")));
 		panel.add(picture);
 		
+		
 		JButton btnTesty = new JButton("Testy");
 		btnTesty.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -84,29 +82,34 @@ public class Main {
 		btnTesty.setBounds(75, 380, 287, 45);
 		frmMain.getContentPane().add(btnTesty);
 		
+		
 		JButton btnProfil = new JButton("Profil");
 		btnProfil.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Profil.main(idUser);
+				frmMain.dispose();
 				}
 		});
 		btnProfil.setBounds(75, 436, 287, 45);
 		frmMain.getContentPane().add(btnProfil);
 		
+		
 		JButton btnLadderboard = new JButton("Ladderboard");
 		btnLadderboard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controller.sortStudent();
+				Ladderboard.main(idUser);
+				frmMain.dispose();
 			}
 		});
 		btnLadderboard.setBounds(75, 492, 287, 45);
 		frmMain.getContentPane().add(btnLadderboard);
 		
+		
 		JButton btnVytvorTest = new JButton("Vytvor test");
 		btnVytvorTest.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				Controller controller = new Controller();
-					controller.vytvorTest();
+				VytvorTest.main(idUser);
+				frmMain.dispose();
 			}
 		});
 		btnVytvorTest.setBounds(75, 548, 287, 45);

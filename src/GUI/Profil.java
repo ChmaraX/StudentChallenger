@@ -31,6 +31,8 @@ public class Profil {
 	public static JLabel txtMeno;
 	public static JLabel txtPriezvisko;
 	public static JLabel txtBody;
+	public static JLabel txtOdzCount;
+	public static JLabel txtTestCount;
 	
 	
 	
@@ -105,7 +107,7 @@ public class Profil {
 		JLabel lblOdznaky = new JLabel("Odznaky:");
 		lblOdznaky.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblOdznaky.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOdznaky.setBounds(98, 334, 57, 14);
+		lblOdznaky.setBounds(98, 364, 57, 14);
 		frmProfil.getContentPane().add(lblOdznaky);
 		
 		txtOdznaky = new JTextArea();
@@ -115,7 +117,7 @@ public class Profil {
 		frmProfil.getContentPane().add(txtOdznaky);
 		
 		JScrollPane scrollable = new JScrollPane(txtOdznaky);
-		scrollable.setBounds(81, 359, 90, 99);
+		scrollable.setBounds(81, 389, 90, 99);
 		frmProfil.getContentPane().add(scrollable);
 		
 		
@@ -146,8 +148,24 @@ public class Profil {
 		frmProfil.getContentPane().add(txtBody);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(108, 321, 209, 2);
+		separator.setBounds(108, 351, 209, 2);
 		frmProfil.getContentPane().add(separator);
+		
+		txtOdzCount = new JLabel("0");
+		txtOdzCount.setHorizontalAlignment(SwingConstants.CENTER);
+		txtOdzCount.setBounds(103, 494, 46, 14);
+		frmProfil.getContentPane().add(txtOdzCount);
+		
+		JLabel lblDokonenTesty = new JLabel("Dokon\u010Den\u00E9 testy:");
+		lblDokonenTesty.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblDokonenTesty.setBounds(98, 321, 105, 14);
+		frmProfil.getContentPane().add(lblDokonenTesty);
+		
+		txtTestCount = new JLabel("New label");
+		txtTestCount.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtTestCount.setForeground(Color.ORANGE);
+		txtTestCount.setBounds(198, 326, 130, 14);
+		frmProfil.getContentPane().add(txtTestCount);
 		
 		
 		

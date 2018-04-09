@@ -57,7 +57,7 @@ public class ZoradOtazka extends Otazka{
 			TestGUI.btnDalej.setText("Potvrd :" + i);
 		/*
 		 * cyklus ktori po stlaceni tlacidla 
-		 * overuje ci je vstup cislo 
+		 * overuje ci je zadany vstup cislo 
 		 */
 		do {	
 			do {

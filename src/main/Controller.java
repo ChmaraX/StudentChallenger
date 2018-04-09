@@ -7,8 +7,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
@@ -183,15 +181,18 @@ public class Controller {
 	}
 	
 	public void docasnaFunkcia() {
-		List<Test> testy = new ArrayList<Test>();
+		//List<Test> testy = new ArrayList<Test>();
 		
-		testy.add(new Test("Prvy test"));
-		
-		testy.get(0).pridajOtazku(new SlovnaOtazka("1 Prva otazka","prva odpoved"));
-		testy.get(0).pridajOtazku(new SlovnaOtazka("1 Druha otazka","druha odpoved"));
-		testy.get(0).pridajOtazku(new MultipleOtazka("1 Tretia otazka", new String[] {"nespravna","nespravna","spravna"},2));
-		testy.get(0).pridajOtazku(new ZoradOtazka("Zorad od najmensieho", new String[] {"3","1","7","4"},new int[] {2,1,4,3} ));
+		List<Test> testy = deserializeTest("testy.ser");
 			
+		testy.add(new Test("Fyzikalny test"));
+		
+		Test currTest = testy.get(testy.size() - 1);
+		
+		currTest.pridajOtazku(new SlovnaOtazka("Ako sa nazvy oblast fyziky skumajuca svetlo?","optika"));
+		currTest.pridajOtazku(new MultipleOtazka("Aka velicina ma znacku m?", new String[] {"cas","teplota","hmotnost","sila"},2));
+		currTest.pridajOtazku(new ZoradOtazka("Zorad dlzky od najvacsej:", new String[] {"1mm","10dm","1km","150m"},new int[] {3,4,2,1} ));
+		currTest.pridajOtazku(new SlovnaOtazka("Aka velicina ma znacku W?","praca"));	
 		
 		
 		serializeTest(testy, "testy.ser");
@@ -232,6 +233,7 @@ public class Controller {
 		actUser.addObserver(odznakObserver);
 		
 		actUser.zvysBody(vysledok);
+		actUser.zvysPocetTestov();
 		
 		if(vysledok == testy.get(testIndex).getPocetOtazok()) 
 			actUser.zvysHotstreak();
@@ -283,7 +285,9 @@ public class Controller {
 	    Profil.txtMeno.setText(actUser.getMeno());
 	    Profil.txtPriezvisko.setText(actUser.getPriezvisko());
 	    Profil.txtBody.setText(Integer.toString(actUser.zistiBody()));
-						
+	    Profil.txtOdzCount.setText(Integer.toString(actUser.getPocetOdznakov()));
+	    Profil.txtTestCount.setText(Integer.toString(actUser.getPocetTestov()));
+	    
 		for(Odznak i : actUser.getOdznaky()){
 			if(i != null)
 				Profil.txtOdznaky.append(i.getNazov() + "\n");
@@ -292,24 +296,31 @@ public class Controller {
 	}
 	
 	
-	public void sortStudent() {
+	public String[][] studentTableData() {
 		
 		List<Student> studenti = deserialize("studenti.ser"); 
-		
-		Collections.sort(studenti, new Comparator<Student>() {
-	        @Override
-	        public int compare(Student student2, Student student1)
-	        {
-
-	            return  new Integer(student1.zistiBody()).compareTo(new Integer(student2.zistiBody()));
-	        }
-	    });
-		
-		System.out.println("Rebricek najlepsich studentov podla bodov \n");
-		for(int i = 0; i < studenti.size(); i++)    
-		    System.out.println("Meno: " + studenti.get(i).getUsername() + "      Pocet bodov: " + studenti.get(i).zistiBody());
 
 		
+		String[][] studentData = new String[studenti.size()][7];
+		int i = 0;
+		for (Student sd : studenti) {
+			//udaje kazdeho ziaka zvlast v cykle
+			
+		
+	        String[] stdata = new String[7];
+	        stdata[0] = sd.getUsername();
+	        stdata[1] = sd.getMeno();
+	        stdata[2] = sd.getPriezvisko();
+	        stdata[3] = Integer.toString(sd.zistiBody());
+	        stdata[4] = Integer.toString(sd.getPocetOdznakov());
+	        stdata[5] = Integer.toString(sd.getPocetTestov());
+
+	        studentData[i++] = stdata;
+	        //premiestni 6 udajov o jednom studentovi do prislusneho riadku matice
+	    }
+
+
+		return studentData;
 		
 	}
 }

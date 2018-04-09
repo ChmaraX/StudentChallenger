@@ -69,6 +69,10 @@ public class Student extends Observable implements Serializable, Body{
 		zvysBody(od.zistiBody());
 	}
 	
+	public int getPocetOdznakov() {
+		return pocetOdznakov;
+	}
+	
 
 	public int zistiBody() {
 		return body;
