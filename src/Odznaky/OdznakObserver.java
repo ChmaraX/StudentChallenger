@@ -2,6 +2,8 @@ package Odznaky;
 import java.util.Observable;
 import java.util.Observer;
 
+import javax.swing.JOptionPane;
+
 import Uzivatelia.Student;
 
 public class OdznakObserver implements Observer {
@@ -17,16 +19,16 @@ public class OdznakObserver implements Observer {
 	void podmienka(int hotstreak) {
 				
 			if(hotstreak == 3) {
-				System.out.println("Ziskal si odznak: Hotstreak x3 (+5b)!");
+				JOptionPane.showMessageDialog(null, "Ziskal si odznak: Hotstreak x3 (+5b)!");
 					actUser.pridajOdznak(new Odznak("Hotstreak x3", 5));
 				
 				}
 			if(hotstreak == 7) {
-				System.out.println("Ziskal si odznak: Hotstreak x7 (+10b)!");
+				JOptionPane.showMessageDialog(null, "Ziskal si odznak: Hotstreak x7 (+10b)!");
 					actUser.pridajOdznak(new Odznak("Hotstreak x7", 10));
 				 }
 			if(hotstreak >= 10) {
-				System.out.println("Ziskal si odznak: Hotstreak x10 (+20b)!");
+				JOptionPane.showMessageDialog(null, "Ziskal si odznak: Hotstreak x10 (+20b)!");
 					actUser.pridajOdznak(new Odznak("Hotstreak x10", 20));
 				 }
 		}
@@ -36,7 +38,6 @@ public class OdznakObserver implements Observer {
 	public void update(Observable arg0, Object arg1) {
 		if (arg1 instanceof Integer) {
 			   hotstreak = (Integer) arg1;
-			   System.out.println("Hotstreak: " + hotstreak);
 			   podmienka(hotstreak);
 			  } 
 	 }

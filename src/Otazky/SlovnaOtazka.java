@@ -1,6 +1,13 @@
 package Otazky;
+
+import java.awt.Color;
 import java.util.Objects;
-import java.util.Scanner;
+
+
+import GUI.TestGUI;
+
+
+
 
 public class SlovnaOtazka extends Otazka {
 
@@ -26,32 +33,44 @@ public class SlovnaOtazka extends Otazka {
 
 	
 	@Override
-	public boolean polozOtazku() {
-		System.out.println(getOtazka());
+	public void polozOtazku() {
+		TestGUI.lblOtazka.setText(getOtazka());
+		TestGUI.txtHint.setText("");
 		
-		if(userOdpoved()) {
-			System.out.println("Spravna odpoved! \n");
-			return true; 
-			}
-		else	{
-			System.out.println("Nespravne! Spravna odpoved -> " + (getOdpoved()) + "\n" );
-			return false; 
-			}
+			
 	}
 	
 	
 	@Override
 	public boolean userOdpoved() {
-		@SuppressWarnings("resource")
-		Scanner scanner = new Scanner(System.in);
-		String userInput = scanner.nextLine();
+		
+		String userInput = null;
+		
+		do {
+			try {
+				Thread.sleep(300);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+		}while(!TestGUI.clicked);
+	
+		
+		userInput = TestGUI.textField.getText();
+		TestGUI.textField.setText("");
+		TestGUI.clicked = false;
 			/*
 		 * Zisti ci sa uzivatelov vstup zhoduje
 		 * so spravnou odpovedou
 		 */
-		if( Objects.equals(getOdpoved(),userInput) ) 
+		if( Objects.equals(getOdpoved(),userInput) ) {
+			TestGUI.lblIndicator.setText("Spravna odpoved!");
+			TestGUI.lblIndicator.setForeground(Color.GREEN);
 			return true;
-						
+		}
+			
+		TestGUI.lblIndicator.setText("Nespravna odpoved! Spravna odpoved -> " + getOdpoved() );		
+		TestGUI.lblIndicator.setForeground(Color.RED);
 		return false;
 				
 	}

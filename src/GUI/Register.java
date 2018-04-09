@@ -32,8 +32,7 @@ public class Register{
 				try {
 					Register window = new Register();
 					window.frmTestsystemRegister.setVisible(true);
-					window.frmTestsystemRegister.setLocationRelativeTo(null); 
-				} catch (Exception e) {
+					} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
@@ -48,9 +47,10 @@ public class Register{
 	
 	private void initialize() {
 		frmTestsystemRegister = new JFrame();
+		frmTestsystemRegister.setResizable(false);
 		frmTestsystemRegister.getContentPane().setBackground(Color.WHITE);
 		frmTestsystemRegister.setTitle("Registracia");
-		frmTestsystemRegister.setBounds(200, 100, 453, 665);
+		frmTestsystemRegister.setBounds(200, 100, 439, 665);
 		frmTestsystemRegister.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmTestsystemRegister.getContentPane().setLayout(null);
 		frmTestsystemRegister.setLocationRelativeTo(null); // center okna do stredu 
@@ -139,7 +139,7 @@ public class Register{
 		btnPrihlasenie.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				Login.main(null);
-				frmTestsystemRegister.setVisible(false);
+				frmTestsystemRegister.dispose();
 			}
 		});
 		

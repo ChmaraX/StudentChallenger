@@ -8,7 +8,7 @@ public abstract class Otazka implements Serializable{
 	public int maxBody;
 	public String otazka = "";
 			
-	public abstract boolean polozOtazku();
+	public abstract void polozOtazku();
 	
 	public abstract boolean userOdpoved();
 	

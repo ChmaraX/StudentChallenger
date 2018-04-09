@@ -6,7 +6,6 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 
 import main.Controller;
-import main.stret;
 
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
@@ -46,9 +45,10 @@ public class Login{
 	
 		private void initialize() {
 		frmLogin = new JFrame();
+		frmLogin.setResizable(false);
 		frmLogin.getContentPane().setBackground(Color.WHITE);
 		frmLogin.setTitle("StudentChallenger Login");
-		frmLogin.setBounds(200, 100, 453, 665);
+		frmLogin.setBounds(200, 100, 439, 665);
 		frmLogin.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmLogin.getContentPane().setLayout(null);
 		frmLogin.setLocationRelativeTo(null); // center okna do stredu 
@@ -88,8 +88,8 @@ public class Login{
 				String username = txtMeno.getText();
 				
 					int idUser = controller.checkLogin(username,password);
-								stret.main(idUser);
-					
+									Main.main(idUser);
+									frmLogin.dispose();													
 				
 			}
 		});
@@ -107,7 +107,7 @@ public class Login{
 			public void actionPerformed(ActionEvent e) {
 				try {
 					Register.main(null); // 
-					frmLogin.setVisible(false);
+					frmLogin.dispose();
 				} catch (Exception e2) {
 					e2.printStackTrace();
 				}
@@ -118,7 +118,7 @@ public class Login{
 		/*
 		 * Obrazok
 		 */
-		Panel panel = new Panel();
+		Panel panel = new Panel(); 
 		panel.setBackground(Color.LIGHT_GRAY);
 		panel.setBounds(0, 0, 436, 331);
 		frmLogin.getContentPane().add(panel);

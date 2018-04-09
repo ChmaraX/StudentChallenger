@@ -1,7 +1,10 @@
 package Otazky;
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.Scanner;
+
+
+import GUI.TestGUI;
 
 public class ZoradOtazka extends Otazka{
 
@@ -36,37 +39,66 @@ public class ZoradOtazka extends Otazka{
 
 
 	@Override
-	public boolean polozOtazku() {
-		System.out.println(getOtazka());
-		System.out.println(Arrays.toString(getOdpoved()));
+	public void polozOtazku() {
+		TestGUI.lblOtazka.setText(getOtazka());
+		TestGUI.lblPomtext.setText(Arrays.toString(getOdpoved()));
+		TestGUI.txtHint.setText("Pomôcka: Napíš èíslo a stlaè -Potvrï- ");
 		
-		if(userOdpoved()) {
-			System.out.println("Spravna odpoved! \n");
-			return true; 
-			}
-		else	{
-			System.out.println("Nespravne! Spravna odpoved -> " + Arrays.toString(getZoradenie()) + "\n" );
-			return false;
-			}
+		
 	}
 
 	@Override
 	public boolean userOdpoved() {
-		@SuppressWarnings("resource") // scanner nieje uzavrety
-		Scanner scanner = new Scanner(System.in);
+		int[] userInput = new int[odpoved.length];
 		int pom = 0; 
-		for(int i = 0; i < odpoved.length; i++ ) {
+		boolean rightInput = true;
 		
-			Integer[] userInput = new Integer[odpoved.length];
-			userInput[i] = scanner.nextInt();
+		for(int i = 0; i < odpoved.length; i++ ) {
+			TestGUI.btnDalej.setText("Potvrd :" + i);
+		/*
+		 * cyklus ktori po stlaceni tlacidla 
+		 * overuje ci je vstup cislo 
+		 */
+		do {	
+			do {
+				try {
+					Thread.sleep(300);
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}  
+			}while(!TestGUI.clicked);
+		
+			try {
+				userInput[i] = Integer.parseInt(TestGUI.textField.getText());
+				rightInput = true;
+			} catch (NumberFormatException e) {
+				TestGUI.lblIndicator.setText("Zadaj cislo!");
+				rightInput = false;
+			}
+		}while(rightInput == false);
+			
+			TestGUI.textField.setText("");
+			TestGUI.lblIndicator.setText("");
+			TestGUI.clicked = false;
+		
+			
 			
 		if( Objects.equals(zoradenie[i],userInput[i]) ) 
 				pom++; 		
 		}
-		if(pom == odpoved.length)
-			return true;
 		
+		if(pom == odpoved.length) {
+			TestGUI.btnDalej.setText("Dalej");
+			TestGUI.lblIndicator.setText("Spravna odpoved! \n");
+			TestGUI.lblIndicator.setForeground(Color.GREEN);
+			TestGUI.txtHint.setText("");
+			TestGUI.lblPomtext.setText("");
+			return true; }
 		
+		TestGUI.lblIndicator.setText("Nespravne! Spravna odpoved -> " + Arrays.toString(getZoradenie()) + "\n" );
+		TestGUI.lblIndicator.setForeground(Color.RED);
+		TestGUI.lblPomtext.setText("");
 		return false;
 	}
 

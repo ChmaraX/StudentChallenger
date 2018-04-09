@@ -1,7 +1,10 @@
 package Otazky;
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.Scanner;
+
+
+import GUI.TestGUI;
 
 public class MultipleOtazka extends Otazka {
 
@@ -22,10 +25,13 @@ public class MultipleOtazka extends Otazka {
 	public String getOtazka() {
 		return otazka;
 	}
-
-
+	
 	public String[] getMoznosti() {
 		return moznosti;
+	}
+
+	public String getMoznost(int i) {
+		return moznosti[i];
 	}
 	
 	public int getOdpoved() {
@@ -34,30 +40,39 @@ public class MultipleOtazka extends Otazka {
 
 
 	@Override
-	public boolean polozOtazku() {
-		System.out.println(getOtazka());
-		System.out.println(Arrays.toString(getMoznosti()));
+	public void polozOtazku() {
+		TestGUI.lblOtazka.setText(getOtazka());
+		TestGUI.lblPomtext.setText(Arrays.toString(getMoznosti()));
+		TestGUI.txtHint.setText("Pomôcka: Napíš správnu odpoveï.");
 		
-		if(userOdpoved()) {
-			System.out.println("Spravna odpoved! \n");
-			return true; 
-			}
-		else	{
-			System.out.println("Nespravne! Spravna odpoved -> " + moznosti[getOdpoved()] + "\n" );
-			return false;
-			}
 	}
 
 	@Override
 	public boolean userOdpoved() {
-		@SuppressWarnings("resource") // scanner nieje uzavrety
-		Scanner scanner = new Scanner(System.in);
-		Integer userInput = scanner.nextInt();
 		
+		String userInput = null;
 		
-		if( Objects.equals(getOdpoved(),userInput) ) 
-			return true;
-		
+		do {
+			try {
+				Thread.sleep(300);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}  
+		}while(!TestGUI.clicked);
+	
+		userInput = TestGUI.textField.getText();
+		TestGUI.textField.setText("");
+		TestGUI.clicked = false;
+				
+		if( Objects.equals(getMoznost(getOdpoved()),userInput) ) {
+			TestGUI.lblIndicator.setText("Spravna odpoved!");
+			TestGUI.lblIndicator.setForeground(Color.GREEN);
+			TestGUI.txtHint.setText("");
+			return true; }
+			
+		TestGUI.lblIndicator.setText("Nespravne! Spravna odpoved -> " + moznosti[getOdpoved()] + "\n" );
+		TestGUI.lblIndicator.setForeground(Color.RED);
 		return false;
 	}
 	

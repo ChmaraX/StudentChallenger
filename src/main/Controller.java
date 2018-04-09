@@ -6,9 +6,17 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
+import GUI.TestGUI;
+import Odznaky.Odznak;
+import Odznaky.OdznakObserver;
 import Otazky.MultipleOtazka;
 
 import Otazky.SlovnaOtazka;
@@ -116,7 +124,7 @@ public class Controller {
 		String nazovTestu = sc.nextLine(); 
 		testy.add(new Test(nazovTestu));
 		
-		Test currTest = testy.get(testy.size() - 1); // zisti poradie posledneho testu
+		Test currTest = testy.get(testy.size() - 1); // zisti poradie aktualneho testu
 		int moznost = -1;
 			
 		while(moznost != 0) {
@@ -192,7 +200,116 @@ public class Controller {
 	}
 	
 
+	public String[] nazvyTestov() {
+		
+		List<Test> testy = deserializeTest("testy.ser");
+		String[] nazvyTestov = new String[testy.size()];
+				
+		for(int i = 0 ; i < testy.size(); i++) {
+			nazvyTestov[i] = testy.get(i).getNazov();
+				}
+		return nazvyTestov;
 }
+	
+	
+	/*
+	 * Zacne a vyhodnoti vybrany test 
+	 * pre vybraneho studnta
+	 */
+	public void zacniTest(int testIndex, int idUser) {
+		
+		List<Test> testy = deserializeTest("testy.ser");
+		
+		int vysledok = testy.get(testIndex).startTest(); 
+		
+		JOptionPane.showMessageDialog(null, "Vysledny pocet bodov: " + vysledok + "/" + testy.get(testIndex).getPocetOtazok());
+
+		List<Student> studenti = deserialize("studenti.ser"); 
+		Student actUser = studenti.get(idUser);
+		
+		OdznakObserver odznakObserver = new OdznakObserver(actUser);
+		actUser.addObserver(odznakObserver);
+		
+		actUser.zvysBody(vysledok);
+		
+		if(vysledok == testy.get(testIndex).getPocetOtazok()) 
+			actUser.zvysHotstreak();
+		else
+			actUser.zmazHotStreak();
+		
+		
+		serialize(studenti,"studenti.ser");
+		
+		
+		
+	}
+	
+	
+	public void vypisStavProfilu(int idUser) {
+		
+		List<Student> studenti = deserialize("studenti.ser"); 
+		Student actUser = studenti.get(idUser);
+		
+		ArrayList<String> list = new ArrayList<String>();
+		for(Odznak i : actUser.getOdznaky()){
+			if(i != null)
+		list.add(i.getNazov());
+				} 
+				
+		int close = JOptionPane.showOptionDialog(TestGUI.frmTest, 
+				"Celkove skore uzivatela - " + actUser.getUsername() + " je: " + actUser.zistiBody() + 
+				"\n Hotstreak: " + actUser.getHotStreak() +
+				"\n Odznaky: " 	+ Arrays.toString(list.toArray())			
+				,"Vysledok testu",
+				JOptionPane.PLAIN_MESSAGE, 
+				JOptionPane.INFORMATION_MESSAGE,
+				null, null, null);
+		
+		
+		
+		if(close == 0) 
+			TestGUI.frmTest.dispose();
+	}
 	
 	 
 
+	public void ukazProfil(int idUser) {
+		
+		List<Student> studenti = deserialize("studenti.ser"); 
+		Student actUser = studenti.get(idUser);
+		
+		System.out.println("Uzivatelske meno: " +  actUser.getUsername() + "\n");
+		System.out.println("Meno: " +  actUser.getMeno());
+		System.out.println("Priezvisko: " +  actUser.getPriezvisko());
+		System.out.println("Celkove body: " +  actUser.zistiBody());
+		System.out.println("Ziskane odznaky:");
+				
+		for(Odznak i : actUser.getOdznaky()){
+			if(i != null)
+		System.out.println(i.getNazov());
+			}
+		
+	}
+	
+	
+	public void sortStudent() {
+		
+		List<Student> studenti = deserialize("studenti.ser"); 
+		
+		Collections.sort(studenti, new Comparator<Student>() {
+	        @Override
+	        public int compare(Student student2, Student student1)
+	        {
+
+	            return  new Integer(student1.zistiBody()).compareTo(new Integer(student2.zistiBody()));
+	        }
+	    });
+		
+		System.out.println("Rebricek najlepsich studentov podla bodov \n");
+		for(int i = 0; i < studenti.size(); i++)    
+		    System.out.println("Meno: " + studenti.get(i).getUsername() + "      Pocet bodov: " + studenti.get(i).zistiBody());
+
+		
+		
+	}
+}

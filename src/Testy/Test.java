@@ -1,6 +1,7 @@
 package Testy;
 import java.io.Serializable;
 
+import GUI.TestGUI;
 import Otazky.Otazka;
 import main.Body;
 
@@ -61,21 +62,22 @@ public class Test implements Serializable,Body {
 		o[pocetOtazok++] = ot;
 		zvysBody(1);
 	}
+		
 	
- 
-	
-	public int startTest() {
-		System.out.println(getNazov());
+	public int startTest()  {
+			TestGUI.lblNazovtestu.setText(getNazov());
+			TestGUI.progressBar.setMaximum(this.pocetOtazok);
+		
         for (int i = 0; i < this.pocetOtazok; i++) {
             Otazka ot = this.o[i];
-            
-            if(!ot.polozOtazku())
-            	znizBody(1);          
-      
+            	ot.polozOtazku();
+                       	
+            if(!ot.userOdpoved())
+            	znizBody(1);    
+           
+            TestGUI.progressBar.setValue(i+1);
         }
-        /* kazda otazka je za defaultne za 1 bod -> max body = pocet otazok */ 
-        System.out.println("Finalne skore: " + zistiBody() + "/" + pocetOtazok);
-        
+               
        return zistiBody();
        
     }
