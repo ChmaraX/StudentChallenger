@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -71,7 +71,7 @@ public class Ladderboard {
 		frmLdr.getContentPane().add(panel);
 		
 		JLabel picture = new JLabel("");
-		picture.setIcon(new ImageIcon(TestGUI.class.getResource("/obrazky/Ladder.jpg")));
+		picture.setIcon(new ImageIcon(ExamGUI.class.getResource("/images/Ladder.jpg")));
 		panel.add(picture);
 		
 		JScrollPane scrollPane = new JScrollPane();
@@ -80,9 +80,9 @@ public class Ladderboard {
 		
 		table = new JTable();
 		scrollPane.setViewportView(table);
-		String[] stlpce = { "Username", "Meno", "Priezvisko", "Body", "Odznaky", "Testy"};	
+		String[] columns = { "Username", "Meno", "Priezvisko", "Body", "Odznaky", "Testy"};	
 				
-		DefaultTableModel tableModel = new DefaultTableModel(controller.studentTableData(), stlpce);
+		DefaultTableModel tableModel = new DefaultTableModel(controller.studentTableData(), columns);
 		table.setModel(tableModel);
 		
 		table.setAutoCreateRowSorter(true); // sortuje tabulku podla vybraneho parametra
@@ -93,15 +93,15 @@ public class Ladderboard {
 		lblLdr.setBounds(133, 163, 165, 31);
 		frmLdr.getContentPane().add(lblLdr);
 		
-		JButton btnNaspat = new JButton("Naspat");
-		btnNaspat.addActionListener(new ActionListener() {
+		JButton btnBack = new JButton("Naspat");
+		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				Main.main(idUser);
 				frmLdr.dispose();
 			}
 		});
-		btnNaspat.setBounds(175, 605, 89, 23);
-		frmLdr.getContentPane().add(btnNaspat);
+		btnBack.setBounds(175, 605, 89, 23);
+		frmLdr.getContentPane().add(btnBack);
 		
 		
 

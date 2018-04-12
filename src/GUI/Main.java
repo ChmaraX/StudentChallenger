@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 
 import java.awt.Color;
 import java.awt.EventQueue;
@@ -7,9 +7,9 @@ import java.awt.Panel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import Odznaky.OdznakObserver;
-import Uzivatelia.Student;
+import badges.BadgeObserver;
 import main.Controller;
+import users.Student;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -44,10 +44,10 @@ public class Main {
 	public Main(int idUser) {
 		initialize();
 		this.idUser = idUser;
-		List<Student> studenti = controller.deserialize("studenti.ser"); 
+		List<Student> studenti = controller.deserialize("students.ser"); 
 		Student actUser = studenti.get(idUser);
-		OdznakObserver odznakObserver = new OdznakObserver(actUser);
-		actUser.addObserver(odznakObserver);
+		BadgeObserver badgeObserver = new BadgeObserver(actUser);
+		actUser.addObserver(badgeObserver);
 	}
 
 	
@@ -68,30 +68,30 @@ public class Main {
 		frmMain.getContentPane().add(panel);
 		
 		JLabel picture = new JLabel("");
-		picture.setIcon(new ImageIcon(TestGUI.class.getResource("/obrazky/Main.jpg")));
+		picture.setIcon(new ImageIcon(ExamGUI.class.getResource("/images/Main.jpg")));
 		panel.add(picture);
 		
 		
-		JButton btnTesty = new JButton("Testy");
-		btnTesty.addActionListener(new ActionListener() {
+		JButton btnExams = new JButton("Testy");
+		btnExams.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VyberTestu.main(idUser);
+				ChooseExam.main(idUser);
 				frmMain.dispose();
 			}
 		});
-		btnTesty.setBounds(75, 380, 287, 45);
-		frmMain.getContentPane().add(btnTesty);
+		btnExams.setBounds(75, 380, 287, 45);
+		frmMain.getContentPane().add(btnExams);
 		
 		
-		JButton btnProfil = new JButton("Profil");
-		btnProfil.addActionListener(new ActionListener() {
+		JButton btnProfile = new JButton("Profil");
+		btnProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Profil.main(idUser);
+				Profile.main(idUser);
 				frmMain.dispose();
 				}
 		});
-		btnProfil.setBounds(75, 436, 287, 45);
-		frmMain.getContentPane().add(btnProfil);
+		btnProfile.setBounds(75, 436, 287, 45);
+		frmMain.getContentPane().add(btnProfile);
 		
 		
 		JButton btnLadderboard = new JButton("Ladderboard");
@@ -105,15 +105,15 @@ public class Main {
 		frmMain.getContentPane().add(btnLadderboard);
 		
 		
-		JButton btnVytvorTest = new JButton("Vytvor test");
-		btnVytvorTest.addActionListener(new ActionListener() {
+		JButton btnCreateExam = new JButton("Vytvor test");
+		btnCreateExam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				VytvorTest.main(idUser);
+				CreateExam.main(idUser);
 				frmMain.dispose();
 			}
 		});
-		btnVytvorTest.setBounds(75, 548, 287, 45);
-		frmMain.getContentPane().add(btnVytvorTest);
+		btnCreateExam.setBounds(75, 548, 287, 45);
+		frmMain.getContentPane().add(btnCreateExam);
 		
 	}
 }

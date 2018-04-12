@@ -12,16 +12,15 @@ import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
-import GUI.Profil;
-import GUI.TestGUI;
-import Odznaky.Odznak;
-import Odznaky.OdznakObserver;
-import Otazky.MultipleOtazka;
-
-import Otazky.SlovnaOtazka;
-import Otazky.ZoradOtazka;
-import Testy.Test;
-import Uzivatelia.Student;
+import badges.Badge;
+import badges.BadgeObserver;
+import exams.Exam;
+import gui.Profile;
+import gui.ExamGUI;
+import questions.MultipleQuestion;
+import questions.SimpleQuestion;
+import questions.OrderQuestion;
+import users.Student;
 
 
 
@@ -52,20 +51,20 @@ public class Controller {
 	}
 	
 	
-	public void addStudent(String username, String password, int vek, String meno, String priezvisko) 
+	public void addStudent(String username, String password, int age, String name, String lastname) 
 			throws FileNotFoundException, IOException, ClassNotFoundException {
 						
 	
-		List<Student> studenti = deserialize("studenti.ser"); 
+		List<Student> studenti = deserialize("students.ser"); 
 		//List<Student> studenti = new ArrayList<Student>();
-		studenti.add(new Student(username, password, vek, meno, priezvisko));
+		studenti.add(new Student(username, password, age, name, lastname));
 		
 		/* studenti.clear();  /*--- vycistenie db*/ 
 		
-		serialize(studenti,"studenti.ser");
+		serialize(studenti,"students.ser");
 				
 		
-		List<Student> newList = deserialize("studenti.ser");
+		List<Student> newList = deserialize("students.ser");
 		System.out.println("Novy list:  " + newList);
 	
 	}
@@ -78,7 +77,7 @@ public class Controller {
 		 */
 		
 		
-		List<Student> studenti = deserialize("studenti.ser"); 
+		List<Student> studenti = deserialize("students.ser"); 
 			
 		for (int i = 0; i < studenti.size(); i++) {
 			
@@ -91,7 +90,7 @@ public class Controller {
 			}
 
 	
-	public void serializeTest(List<Test> tList, String fileName) {
+	public void serializeExam(List<Exam> tList, String fileName) {
 		try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName))) {
 			out.writeObject(tList);
 		} catch(IOException ex) {
@@ -102,10 +101,10 @@ public class Controller {
 	
 	
 	@SuppressWarnings("unchecked")
-	public List<Test> deserializeTest(String fileName) {
-		List<Test> tList = null; 
+	public List<Exam> deserializeExam(String fileName) {
+		List<Exam> tList = null; 
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
-			tList = (List<Test>) in.readObject();
+			tList = (List<Exam>) in.readObject();
 		} catch (IOException | ClassNotFoundException ex) {
 			System.out.printf("Problem pri deserializacii testov", fileName); 
 			System.out.println(ex.getMessage());
@@ -114,103 +113,103 @@ public class Controller {
 	}
 	
 	
-	public void vytvorTest() {
+	public void createExam() {
 		
-		List<Test> testy = deserializeTest("testy.ser");
+		List<Exam> testy = deserializeExam("exams.ser");
 		Scanner sc = new Scanner(System.in);
 			
 		System.out.println("Zadaj nazov testu: ");
-		String nazovTestu = sc.nextLine(); 
-		testy.add(new Test(nazovTestu));
+		String examName = sc.nextLine(); 
+		testy.add(new Exam(examName));
 		
-		Test currTest = testy.get(testy.size() - 1); // zisti poradie aktualneho testu
-		int moznost = -1;
+		Exam currTest = testy.get(testy.size() - 1); // zisti poradie aktualneho testu
+		int option = -1;
 			
-		while(moznost != 0) {
+		while(option != 0) {
 			
 			System.out.println("Aky typ otazky chces pridat?: \n");
 			System.out.println("1. Slovna \n2. Multiple \n3. Zoradovacia \n0. Vytvor test");	
-			moznost = sc.nextInt();
+			option = sc.nextInt();
 			sc.nextLine();
 			
-		if(moznost == 1) {
+		if(option == 1) {
 			System.out.println("Zadaj znenie otazky: ");
-					String znenie = sc.nextLine();
+					String question = sc.nextLine();
 					
 			System.out.println("Zadaj odpoved: ");
-					String odpoved = sc.nextLine();
+					String answer = sc.nextLine();
 				
-					currTest.pridajOtazku(new SlovnaOtazka(znenie, odpoved)); 
+					currTest.addQuestion(new SimpleQuestion(question, answer)); 
 		}
-		if(moznost == 2) {
+		if(option == 2) {
 			System.out.println("Zadaj znenie otazky: \n");
-					String znenie = sc.nextLine();
+					String question = sc.nextLine();
 					
 			System.out.println("Zadaj moznosti: \n");
-			String[] moznosti = new String[4];
+			String[] options = new String[4];
 						for (int i = 0; i < 4; i ++) 
-								moznosti[i] = sc.nextLine();
+								options[i] = sc.nextLine();
 						
 			System.out.println("Zadaj cislo spravnej moznosti: \n");
-						Integer spravna = sc.nextInt();
+						Integer correctAnswer = sc.nextInt();
 						sc.nextLine();
 					
-					currTest.pridajOtazku(new MultipleOtazka(znenie, moznosti, spravna));
+					currTest.addQuestion(new MultipleQuestion(question, options, correctAnswer));
 		}
-		if(moznost == 3) {
+		if(option == 3) {
 			System.out.println("Zadaj znenie otazky: \n");
-					String znenie = sc.nextLine();
+					String question = sc.nextLine();
 					
 			System.out.println("Zadaj odpovede na zoradenie: \n");
-					String[] odpovede = new String[4];
+					String[] answers = new String[4];
 						for (int i = 0; i < 4; i ++) 
-								odpovede[i] = sc.nextLine();
+								answers[i] = sc.nextLine();
 							
 			System.out.println("Zadaj spravnu postupnost cisiel: \n");
-					int[] postupnost = new int[4];
+					int[] order = new int[4];
 						for (int i = 0; i < 4; i ++) 
-								postupnost[i] = sc.nextInt();
+								order[i] = sc.nextInt();
 							
 					
-						currTest.pridajOtazku(new ZoradOtazka(znenie, odpovede, postupnost));	
+						currTest.addQuestion(new OrderQuestion(question, answers, order));	
 					
 		}
 	}
 		sc.close();
-		serializeTest(testy, "testy.ser");		
+		serializeExam(testy, "exams.ser");		
 	}
 	
 	public void docasnaFunkcia() {
-		//List<Test> testy = new ArrayList<Test>();
+		//List<Exam> testy = new ArrayList<Exam>();
 		
-		List<Test> testy = deserializeTest("testy.ser");
+		List<Exam> testy = deserializeExam("exams.ser");
 			
-		testy.add(new Test("Fyzikalny test"));
+		testy.add(new Exam("Matematicky test"));
 		
-		Test currTest = testy.get(testy.size() - 1);
+		Exam currTest = testy.get(testy.size() - 1);
 		
-		currTest.pridajOtazku(new SlovnaOtazka("Ako sa nazvy oblast fyziky skumajuca svetlo?","optika"));
-		currTest.pridajOtazku(new MultipleOtazka("Aka velicina ma znacku m?", new String[] {"cas","teplota","hmotnost","sila"},2));
-		currTest.pridajOtazku(new ZoradOtazka("Zorad dlzky od najvacsej:", new String[] {"1mm","10dm","1km","150m"},new int[] {3,4,2,1} ));
-		currTest.pridajOtazku(new SlovnaOtazka("Aka velicina ma znacku W?","praca"));	
+		currTest.addQuestion(new SimpleQuestion("Aky typ funkcie je y = x + 1?","linearna"));
+		currTest.addQuestion(new MultipleQuestion("Funkcia sinus je pomer protilahlej na:", new String[] {"vysku","taznicu","preponu","uhol"},2));
+		currTest.addQuestion(new OrderQuestion("Zorad od najmensieho:", new String[] {"log 10","2pi","0","-e"},new int[] {4,3,1,2} ));
+		currTest.addQuestion(new SimpleQuestion("Meno slavneho matematika na P.","Pytagoras"));	
 		
 		
-		serializeTest(testy, "testy.ser");
+		serializeExam(testy, "exams.ser");
 	
-		List<Test> testy2 = deserializeTest("testy.ser");
+		List<Exam> testy2 = deserializeExam("exams.ser");
 		System.out.println(testy2);
 	}
 	
 
-	public String[] nazvyTestov() {
+	public String[] examNames() {
 		
-		List<Test> testy = deserializeTest("testy.ser");
-		String[] nazvyTestov = new String[testy.size()];
+		List<Exam> testy = deserializeExam("exams.ser");
+		String[] examNames = new String[testy.size()];
 				
 		for(int i = 0 ; i < testy.size(); i++) {
-			nazvyTestov[i] = testy.get(i).getNazov();
+			examNames[i] = testy.get(i).getName();
 				}
-		return nazvyTestov;
+		return examNames;
 }
 	
 	
@@ -218,50 +217,51 @@ public class Controller {
 	 * Zacne a vyhodnoti vybrany test 
 	 * pre vybraneho studnta
 	 */
-	public void zacniTest(int testIndex, int idUser) {
+	public void startExam(int testIndex, int idUser) {
 		
-		List<Test> testy = deserializeTest("testy.ser");
+		List<Exam> testy = deserializeExam("exams.ser");
 		
-		int vysledok = testy.get(testIndex).startTest(); 
+		int result = testy.get(testIndex).startExam(); 
 		
-		JOptionPane.showMessageDialog(null, "Vysledny pocet bodov: " + vysledok + "/" + testy.get(testIndex).getPocetOtazok());
+		JOptionPane.showMessageDialog(null, "Vysledny pocet bodov: " + result + "/" + testy.get(testIndex).getQuestionCount());
 
-		List<Student> studenti = deserialize("studenti.ser"); 
+		List<Student> studenti = deserialize("students.ser"); 
 		Student actUser = studenti.get(idUser);
 		
-		OdznakObserver odznakObserver = new OdznakObserver(actUser);
-		actUser.addObserver(odznakObserver);
+		BadgeObserver badgeObserver = new BadgeObserver(actUser);
+		actUser.addObserver(badgeObserver);
 		
-		actUser.zvysBody(vysledok);
-		actUser.zvysPocetTestov();
 		
-		if(vysledok == testy.get(testIndex).getPocetOtazok()) 
-			actUser.zvysHotstreak();
+		actUser.incPoints(result);
+		actUser.incExamCount();
+		
+		if(result == testy.get(testIndex).getQuestionCount()) 
+			actUser.incHotstreakCount();
 		else
-			actUser.zmazHotStreak();
+			actUser.nullHotstreakCount();
 		
 		
-		serialize(studenti,"studenti.ser");
+		serialize(studenti,"students.ser");
 		
 		
 		
 	}
 	
 	
-	public void vypisStavProfilu(int idUser) {
+	public void showProfileStats(int idUser) {
 		
-		List<Student> studenti = deserialize("studenti.ser"); 
+		List<Student> studenti = deserialize("students.ser"); 
 		Student actUser = studenti.get(idUser);
 		
 		ArrayList<String> list = new ArrayList<String>();
-		for(Odznak i : actUser.getOdznaky()){
+		for(Badge i : actUser.getBadges()){
 			if(i != null)
-		list.add(i.getNazov());
+		list.add(i.getName());
 				} 
 				
-		int close = JOptionPane.showOptionDialog(TestGUI.frmTest, 
-				"Celkove skore uzivatela - " + actUser.getUsername() + " je: " + actUser.zistiBody() + 
-				"\n Hotstreak: " + actUser.getHotStreak() +
+		int close = JOptionPane.showOptionDialog(ExamGUI.frmTest, 
+				"Celkove skore uzivatela - " + actUser.getUsername() + " je: " + actUser.getPoints() + 
+				"\n Hotstreak: " + actUser.getHotstreakCount() +
 				"\n Odznaky: " 	+ Arrays.toString(list.toArray())			
 				,"Vysledok testu",
 				JOptionPane.PLAIN_MESSAGE, 
@@ -271,26 +271,26 @@ public class Controller {
 		
 		
 		if(close == 0) 
-			TestGUI.frmTest.dispose();
+			ExamGUI.frmTest.dispose();
 	}
 	
 	 
 
-	public void ukazProfil(int idUser) {
+	public void showProfile(int idUser) {
 		
-		List<Student> studenti = deserialize("studenti.ser"); 
+		List<Student> studenti = deserialize("students.ser"); 
 		Student actUser = studenti.get(idUser);
 		
-		Profil.lblNickname.setText(actUser.getUsername());
-	    Profil.txtMeno.setText(actUser.getMeno());
-	    Profil.txtPriezvisko.setText(actUser.getPriezvisko());
-	    Profil.txtBody.setText(Integer.toString(actUser.zistiBody()));
-	    Profil.txtOdzCount.setText(Integer.toString(actUser.getPocetOdznakov()));
-	    Profil.txtTestCount.setText(Integer.toString(actUser.getPocetTestov()));
+		Profile.lblNickname.setText(actUser.getUsername());
+	    Profile.txtName.setText(actUser.getName());
+	    Profile.txtLastname.setText(actUser.getLastname());
+	    Profile.txtPoints.setText(Integer.toString(actUser.getPoints()));
+	    Profile.txtBadgeCount.setText(Integer.toString(actUser.getBadgesCount()));
+	    Profile.txtExamCount.setText(Integer.toString(actUser.getExamCount()));
 	    
-		for(Odznak i : actUser.getOdznaky()){
+		for(Badge i : actUser.getBadges()){
 			if(i != null)
-				Profil.txtOdznaky.append(i.getNazov() + "\n");
+				Profile.txtBadges.append(i.getName() + "\n");
 			}
 		
 	}
@@ -298,7 +298,7 @@ public class Controller {
 	
 	public String[][] studentTableData() {
 		
-		List<Student> studenti = deserialize("studenti.ser"); 
+		List<Student> studenti = deserialize("students.ser"); 
 
 		
 		String[][] studentData = new String[studenti.size()][7];
@@ -309,11 +309,11 @@ public class Controller {
 		
 	        String[] stdata = new String[7];
 	        stdata[0] = sd.getUsername();
-	        stdata[1] = sd.getMeno();
-	        stdata[2] = sd.getPriezvisko();
-	        stdata[3] = Integer.toString(sd.zistiBody());
-	        stdata[4] = Integer.toString(sd.getPocetOdznakov());
-	        stdata[5] = Integer.toString(sd.getPocetTestov());
+	        stdata[1] = sd.getName();
+	        stdata[2] = sd.getLastname();
+	        stdata[3] = Integer.toString(sd.getPoints());
+	        stdata[4] = Integer.toString(sd.getBadgesCount());
+	        stdata[5] = Integer.toString(sd.getExamCount());
 
 	        studentData[i++] = stdata;
 	        //premiestni 6 udajov o jednom studentovi do prislusneho riadku matice

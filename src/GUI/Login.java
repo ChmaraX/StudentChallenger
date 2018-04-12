@@ -1,4 +1,4 @@
-package GUI;
+package gui;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -18,8 +18,8 @@ import javax.swing.ImageIcon;
 public class Login{
 
 	private JFrame frmLogin;
-	private JTextField txtMeno;
-	private JPasswordField txtHeslo;
+	private JTextField txtUsername;
+	private JPasswordField txtPassword;
 
 	Controller controller = new Controller();
 	
@@ -53,23 +53,23 @@ public class Login{
 		frmLogin.getContentPane().setLayout(null);
 		frmLogin.setLocationRelativeTo(null); // center okna do stredu 
 
-		JLabel lblMeno = new JLabel("PRIHLASOVACIE MENO:");
-		lblMeno.setBounds(75, 386, 136, 14);
-		frmLogin.getContentPane().add(lblMeno);
+		JLabel lblName = new JLabel("PRIHLASOVACIE MENO:");
+		lblName.setBounds(75, 386, 136, 14);
+		frmLogin.getContentPane().add(lblName);
 
-		JLabel lblHeslo = new JLabel("HESLO:");
-		lblHeslo.setBackground(new Color(255, 255, 255));
-		lblHeslo.setBounds(75, 446, 46, 14);
-		frmLogin.getContentPane().add(lblHeslo);
+		JLabel lblPassword = new JLabel("HESLO:");
+		lblPassword.setBackground(new Color(255, 255, 255));
+		lblPassword.setBounds(75, 446, 46, 14);
+		frmLogin.getContentPane().add(lblPassword);
 
-		txtMeno = new JTextField();
-		txtMeno.setBounds(75, 400, 287, 35);
-		frmLogin.getContentPane().add(txtMeno);
-		txtMeno.setColumns(10);
+		txtUsername = new JTextField();
+		txtUsername.setBounds(75, 400, 287, 35);
+		frmLogin.getContentPane().add(txtUsername);
+		txtUsername.setColumns(10);
 
-		txtHeslo = new JPasswordField();
-		txtHeslo.setBounds(75, 460, 287, 35);
-		frmLogin.getContentPane().add(txtHeslo);
+		txtPassword = new JPasswordField();
+		txtPassword.setBounds(75, 460, 287, 35);
+		frmLogin.getContentPane().add(txtPassword);
 
 		
 		/*
@@ -84,8 +84,8 @@ public class Login{
 			public void actionPerformed(ActionEvent e) {
 
 				@SuppressWarnings("deprecation")
-				String password = txtHeslo.getText();
-				String username = txtMeno.getText();
+				String password = txtPassword.getText();
+				String username = txtUsername.getText();
 				
 					int idUser = controller.checkLogin(username,password);
 									Main.main(idUser);
@@ -124,7 +124,7 @@ public class Login{
 		frmLogin.getContentPane().add(panel);
 		
 		JLabel label = new JLabel("");
-		label.setIcon(new ImageIcon(Login.class.getResource("/obrazky/LoginLogo.jpg")));
+		label.setIcon(new ImageIcon(Login.class.getResource("/images/LoginLogo.jpg")));
 		panel.add(label);
 
 	}
