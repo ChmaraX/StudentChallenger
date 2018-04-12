@@ -24,7 +24,6 @@ public class Badge implements Serializable,Points{
 		this.name = name;
 	}
 	
-	
 
 	@Override
 	public int getPoints() {

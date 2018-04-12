@@ -13,7 +13,8 @@ import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 import badges.Badge;
-import badges.BadgeObserver;
+import badges.HotstreakBadge;
+import badges.ExamBadge;
 import exams.Exam;
 import gui.Profile;
 import gui.ExamGUI;
@@ -228,8 +229,10 @@ public class Controller {
 		List<Student> studenti = deserialize("students.ser"); 
 		Student actUser = studenti.get(idUser);
 		
-		BadgeObserver badgeObserver = new BadgeObserver(actUser);
+		HotstreakBadge badgeObserver = new HotstreakBadge(actUser);
+		ExamBadge examObserver = new ExamBadge(actUser);
 		actUser.addObserver(badgeObserver);
+		actUser.addObserver(examObserver);
 		
 		
 		actUser.incPoints(result);

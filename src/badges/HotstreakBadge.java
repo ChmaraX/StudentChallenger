@@ -6,17 +6,17 @@ import javax.swing.JOptionPane;
 
 import users.Student;
 
-public class BadgeObserver implements Observer {
+public class HotstreakBadge implements Observer {
 
 	private Student actUser;
 	private int hotstreak;
 	
-	public BadgeObserver(Student actUser) {
+	public HotstreakBadge(Student actUser) {
 		this.actUser = actUser;
 	}
 	
 
-	void podmienka(int hotstreak) {
+	void podmienkaHS(int hotstreak) {
 				
 			if(hotstreak == 3) {
 				JOptionPane.showMessageDialog(null, "Ziskal si odznak: Hotstreak x3 (+5b)!");
@@ -33,12 +33,13 @@ public class BadgeObserver implements Observer {
 				 }
 		}
 	
+		
 
 	@Override
 	public void update(Observable arg0, Object arg1) {
 		if (arg1 instanceof Integer) {
 			   hotstreak = (Integer) arg1;
-			   podmienka(hotstreak);
+			   podmienkaHS(hotstreak);
 			  } 
 	 }
 	

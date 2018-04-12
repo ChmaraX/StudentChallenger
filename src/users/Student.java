@@ -119,6 +119,8 @@ public class Student extends Observable implements Serializable, Points{
 
 	public void incExamCount() {
 		this.examCount++;
+		setChanged();
+		notifyObservers(examCount);
 	}
 
 
