@@ -281,19 +281,22 @@ public class Controller {
 
 	public void showProfile(int idUser) {
 		
+		Profile profile = new Profile(idUser);
 		List<Student> studenti = deserialize("students.ser"); 
 		Student actUser = studenti.get(idUser);
 		
-		Profile.lblNickname.setText(actUser.getUsername());
-	    Profile.txtName.setText(actUser.getName());
-	    Profile.txtLastname.setText(actUser.getLastname());
-	    Profile.txtPoints.setText(Integer.toString(actUser.getPoints()));
-	    Profile.txtBadgeCount.setText(Integer.toString(actUser.getBadgesCount()));
-	    Profile.txtExamCount.setText(Integer.toString(actUser.getExamCount()));
+		
+		profile.lblNickname.setText(actUser.getUsername());
+	    profile.txtName.setText(actUser.getName());
+	    profile.txtLastname.setText(actUser.getLastname());
+	    profile.txtPoints.setText(Integer.toString(actUser.getPoints()));
+	    profile.txtBadgeCount.setText(Integer.toString(actUser.getBadgesCount()));
+	    profile.txtExamCount.setText(Integer.toString(actUser.getExamCount()));
+	    profile.txtAge.setText(Integer.toString(actUser.getAge()));
 	    
 		for(Badge i : actUser.getBadges()){
 			if(i != null)
-				Profile.txtBadges.append(i.getName() + "\n");
+				profile.txtBadges.append(i.getName() + "\n");
 			}
 		
 	}

@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Panel;
 
 import javax.swing.ImageIcon;
@@ -25,37 +24,24 @@ public class Profile {
 
 	private JFrame frmProfile;
 	private int idUser;
-	public static JTextArea txtBadges;
+	public JLabel lblNickname;
+	public JLabel txtName;
+	public JLabel txtLastname;
+	public JLabel txtPoints;
+	public JLabel txtBadgeCount;
+	public JLabel txtExamCount;
+	public JLabel txtAge;
+	public JTextArea txtBadges;
 	Controller controller = new Controller();
-	public static JLabel lblNickname;
-	public static JLabel txtName;
-	public static JLabel txtLastname;
-	public static JLabel txtPoints;
-	public static JLabel txtBadgeCount;
-	public static JLabel txtExamCount;
-	
-	
-	
-	
-	public static void main(int idUser) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Profile window = new Profile(idUser);
-					window.frmProfile.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
+	
 	
 	
 	public Profile(int idUser) {
 		initialize();
 		this.idUser = idUser;
-		controller.showProfile(idUser);
+		frmProfile.setVisible(true);
+	
 	}
 
 	
@@ -101,13 +87,13 @@ public class Profile {
 		
 		JLabel lblPoints = new JLabel("Celkov\u00E9 body: ");
 		lblPoints.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblPoints.setBounds(98, 296, 90, 14);
+		lblPoints.setBounds(98, 324, 90, 14);
 		frmProfile.getContentPane().add(lblPoints);
 		
 		JLabel lblBadges = new JLabel("Odznaky:");
 		lblBadges.setFont(new Font("Tahoma", Font.BOLD, 11));
 		lblBadges.setHorizontalAlignment(SwingConstants.CENTER);
-		lblBadges.setBounds(98, 364, 57, 14);
+		lblBadges.setBounds(98, 392, 57, 14);
 		frmProfile.getContentPane().add(lblBadges);
 		
 		txtBadges = new JTextArea();
@@ -117,7 +103,7 @@ public class Profile {
 		frmProfile.getContentPane().add(txtBadges);
 		
 		JScrollPane scrollable = new JScrollPane(txtBadges);
-		scrollable.setBounds(81, 389, 90, 99);
+		scrollable.setBounds(81, 417, 90, 99);
 		frmProfile.getContentPane().add(scrollable);
 		
 		
@@ -144,28 +130,38 @@ public class Profile {
 		txtPoints = new JLabel("New label");
 		txtPoints.setForeground(new Color(50, 205, 50));
 		txtPoints.setHorizontalAlignment(SwingConstants.RIGHT);
-		txtPoints.setBounds(198, 296, 130, 14);
+		txtPoints.setBounds(198, 324, 130, 14);
 		frmProfile.getContentPane().add(txtPoints);
 		
 		JSeparator separator = new JSeparator();
-		separator.setBounds(108, 351, 209, 2);
+		separator.setBounds(108, 379, 209, 2);
 		frmProfile.getContentPane().add(separator);
 		
 		txtBadgeCount = new JLabel("0");
 		txtBadgeCount.setHorizontalAlignment(SwingConstants.CENTER);
-		txtBadgeCount.setBounds(103, 494, 46, 14);
+		txtBadgeCount.setBounds(103, 522, 46, 14);
 		frmProfile.getContentPane().add(txtBadgeCount);
 		
 		JLabel lblExamCount = new JLabel("Dokon\u010Den\u00E9 testy:");
 		lblExamCount.setFont(new Font("Tahoma", Font.BOLD, 11));
-		lblExamCount.setBounds(98, 321, 105, 14);
+		lblExamCount.setBounds(98, 349, 105, 14);
 		frmProfile.getContentPane().add(lblExamCount);
 		
 		txtExamCount = new JLabel("New label");
 		txtExamCount.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtExamCount.setForeground(Color.ORANGE);
-		txtExamCount.setBounds(198, 326, 130, 14);
+		txtExamCount.setBounds(198, 354, 130, 14);
 		frmProfile.getContentPane().add(txtExamCount);
+		
+		JLabel lblAge = new JLabel("Vek:");
+		lblAge.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblAge.setBounds(98, 293, 90, 14);
+		frmProfile.getContentPane().add(lblAge);
+		
+		txtAge = new JLabel("New label");
+		txtAge.setHorizontalAlignment(SwingConstants.RIGHT);
+		txtAge.setBounds(198, 293, 130, 14);
+		frmProfile.getContentPane().add(txtAge);
 		
 		
 		

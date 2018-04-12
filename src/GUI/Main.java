@@ -86,7 +86,7 @@ public class Main {
 		JButton btnProfile = new JButton("Profil");
 		btnProfile.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Profile.main(idUser);
+				controller.showProfile(idUser);
 				frmMain.dispose();
 				}
 		});
