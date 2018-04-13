@@ -14,13 +14,21 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import javax.swing.JTextField;
+import java.awt.Font;
 
 public class CreateExam {
 
 	private JFrame frmCreateExam;
 	private int idUser;
-	public static JLabel lblStatus;
 	Controller controller = new Controller();
+	public static JTextField txtNazovTestu;
+	public static JLabel lblZadajNazovTestu;
+	public static JButton btnCreateExam;
+	public static JButton btnPotvrd;
+	public static boolean clicked;
+	public static JLabel lblPom;
+	
 
 	
 	
@@ -47,7 +55,7 @@ public class CreateExam {
 
 	
 	
-	private void initialize() {
+	public void initialize() {
 		
 		frmCreateExam = new JFrame();
 		frmCreateExam.setResizable(false);
@@ -67,24 +75,14 @@ public class CreateExam {
 		picture.setIcon(new ImageIcon(ExamGUI.class.getResource("/images/Exam.jpg")));
 		panel.add(picture);
 		
-		JButton btnCreateExam = new JButton("Vytvor test");
+		btnCreateExam = new JButton("Vytvor test");
 		btnCreateExam.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				start();
 			}
 		});
-		btnCreateExam.setBounds(131, 211, 167, 36);
+		btnCreateExam.setBounds(131, 173, 167, 36);
 		frmCreateExam.getContentPane().add(btnCreateExam);
-		
-		JLabel lblzatiaCezKonzolu = new JLabel("(zatia\u013E cez konzolu)");
-		lblzatiaCezKonzolu.setHorizontalAlignment(SwingConstants.CENTER);
-		lblzatiaCezKonzolu.setBounds(150, 258, 137, 14);
-		frmCreateExam.getContentPane().add(lblzatiaCezKonzolu);
-		
-		lblStatus = new JLabel("test");
-		lblStatus.setHorizontalAlignment(SwingConstants.CENTER);
-		lblStatus.setBounds(83, 315, 272, 14);
-		frmCreateExam.getContentPane().add(lblStatus);
 		
 		JButton btnBack = new JButton("Naspat");
 		btnBack.addActionListener(new ActionListener() {
@@ -93,8 +91,36 @@ public class CreateExam {
 				frmCreateExam.dispose();
 			}
 		});
-		btnBack.setBounds(178, 382, 89, 23);
+		btnBack.setBounds(177, 602, 89, 23);
 		frmCreateExam.getContentPane().add(btnBack);
+		
+		lblZadajNazovTestu = new JLabel("Zadaj nazov testu:");
+		lblZadajNazovTestu.setFont(new Font("Tahoma", Font.BOLD, 13));
+		lblZadajNazovTestu.setHorizontalAlignment(SwingConstants.CENTER);
+		lblZadajNazovTestu.setBounds(57, 259, 325, 14);
+		lblZadajNazovTestu.setVisible(false);
+		frmCreateExam.getContentPane().add(lblZadajNazovTestu);
+		
+		txtNazovTestu = new JTextField();
+		txtNazovTestu.setBounds(131, 319, 167, 20);
+		txtNazovTestu.setVisible(false);
+		frmCreateExam.getContentPane().add(txtNazovTestu);
+		txtNazovTestu.setColumns(10);
+		
+		btnPotvrd = new JButton("Potvrd");
+		btnPotvrd.setVisible(false);
+		btnPotvrd.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				clicked = true;
+			}
+		});
+		btnPotvrd.setBounds(177, 350, 89, 23);
+		frmCreateExam.getContentPane().add(btnPotvrd);
+		
+		lblPom = new JLabel("");
+		lblPom.setHorizontalAlignment(SwingConstants.CENTER);
+		lblPom.setBounds(57, 284, 325, 23);
+		frmCreateExam.getContentPane().add(lblPom);
 		
 		
 		
@@ -108,13 +134,22 @@ public class CreateExam {
 
 			@Override
 			protected String doInBackground() throws Exception {							
+							
+				
 					controller.createExam();			
 				return null;
 			}
 				
 			@Override
 			protected void done() {	
-					lblStatus.setText("Novy test bol uspesne vytvoreny.");
+				btnCreateExam.setVisible(false);
+				btnPotvrd.setVisible(false);
+				txtNazovTestu.setVisible(false);
+				lblPom.setVisible(false);
+				
+				lblZadajNazovTestu.setText("Test bol úspešne vytvorený.");
+				lblZadajNazovTestu.setForeground(Color.GREEN);
+					
 				}
 						
 		};
@@ -122,11 +157,6 @@ public class CreateExam {
 		worker.execute();
 			
 	}	
-	
-	
-	
-	
-	
 }
 	
 	

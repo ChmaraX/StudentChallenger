@@ -89,8 +89,9 @@ public class ChooseExam {
 			public void actionPerformed(ActionEvent e) {
 				//prepne do TestGUI s indexom vybraneho testu
 				int index = list.getSelectedIndex();
-				ExamGUI.main(index, idUser);
-							
+				@SuppressWarnings("unused")
+				ExamGUI window = new ExamGUI(index, idUser);
+											
 			}
 		});
 		frmExams.getContentPane().add(btnChoose);

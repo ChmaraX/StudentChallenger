@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Panel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -36,34 +35,19 @@ public class ExamGUI {
 	Controller controller = new Controller();
 	private JLabel picture;
 	
-
-	
-	public static void main(int index, int idUser) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					@SuppressWarnings("unused")
-					ExamGUI window = new ExamGUI(index, idUser);
-					ExamGUI.frmTest.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
 	
 	
 	public ExamGUI(int index, int idUser) {
 		initialize();
 		this.idUser = idUser;
-		this.index = index;		
+		this.index = index;	
+		frmTest.setVisible(true);
 		
 	}
 
 	
 	
-	public void initialize() {
+	private void initialize() {
 		
 		frmTest = new JFrame();
 		frmTest.setResizable(false);

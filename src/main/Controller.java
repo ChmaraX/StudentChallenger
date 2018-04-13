@@ -8,7 +8,6 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 import javax.swing.JOptionPane;
 
@@ -17,6 +16,7 @@ import badges.HotstreakBadge;
 import badges.ExamBadge;
 import exams.Exam;
 import gui.Profile;
+import gui.CreateExam;
 import gui.ExamGUI;
 import questions.MultipleQuestion;
 import questions.SimpleQuestion;
@@ -114,69 +114,135 @@ public class Controller {
 	}
 	
 	
-	public void createExam() {
+	public void createExam() throws InterruptedException {
 		
 		List<Exam> testy = deserializeExam("exams.ser");
-		Scanner sc = new Scanner(System.in);
-			
-		System.out.println("Zadaj nazov testu: ");
-		String examName = sc.nextLine(); 
+					
+		CreateExam.btnCreateExam.setVisible(false);
+		CreateExam.lblZadajNazovTestu.setVisible(true);
+		CreateExam.btnPotvrd.setVisible(true);
+		CreateExam.txtNazovTestu.setVisible(true);
+		
+		CreateExam.lblZadajNazovTestu.setText("Zadaj nazov testu: ");
+		
+		do{
+		Thread.sleep(500);	
+		}while(CreateExam.clicked == false);
+		//caka na kliknutie tlacidla pre vytvorenie testu
+		String examName = CreateExam.txtNazovTestu.getText(); 				
 		testy.add(new Exam(examName));
+		CreateExam.txtNazovTestu.setText("");
+		CreateExam.clicked = false;
+		
 		
 		Exam currTest = testy.get(testy.size() - 1); // zisti poradie aktualneho testu
 		int option = -1;
 			
 		while(option != 0) {
 			
-			System.out.println("Aky typ otazky chces pridat?: \n");
-			System.out.println("1. Slovna \n2. Multiple \n3. Zoradovacia \n0. Vytvor test");	
-			option = sc.nextInt();
-			sc.nextLine();
+			CreateExam.lblZadajNazovTestu.setText("Aky typ otazky chces pridat?");
+			CreateExam.lblPom.setText("1. Slovna \n2. Multiple \n3. Zoradovacia \n0. Vytvor test");	
+			do{
+				Thread.sleep(500);	
+				}while(CreateExam.clicked == false);
+			option = Integer.parseInt(CreateExam.txtNazovTestu.getText());
+			CreateExam.clicked = false;
+			CreateExam.txtNazovTestu.setText("");
+			CreateExam.lblPom.setText("");
+			
 			
 		if(option == 1) {
-			System.out.println("Zadaj znenie otazky: ");
-					String question = sc.nextLine();
+			CreateExam.lblZadajNazovTestu.setText("Zadaj znenie otazky: ");
 					
-			System.out.println("Zadaj odpoved: ");
-					String answer = sc.nextLine();
+			do{
+				Thread.sleep(500);	
+				}while(CreateExam.clicked == false);
+			String question =  CreateExam.txtNazovTestu.getText();
+			CreateExam.clicked = false;
+			CreateExam.txtNazovTestu.setText("");
+					
+			CreateExam.lblZadajNazovTestu.setText("Zadaj odpoved:");
+			do{
+				Thread.sleep(500);	
+				}while(CreateExam.clicked == false);
+					String answer = CreateExam.txtNazovTestu.getText();
+					CreateExam.clicked = false;
+					CreateExam.txtNazovTestu.setText("");
 				
 					currTest.addQuestion(new SimpleQuestion(question, answer)); 
 		}
 		if(option == 2) {
-			System.out.println("Zadaj znenie otazky: \n");
-					String question = sc.nextLine();
-					
-			System.out.println("Zadaj moznosti: \n");
-			String[] options = new String[4];
-						for (int i = 0; i < 4; i ++) 
-								options[i] = sc.nextLine();
+			CreateExam.lblZadajNazovTestu.setText("Zadaj znenie otazky: \n");
+			do{
+				Thread.sleep(500);	
+				}while(CreateExam.clicked == false);
+						String question = CreateExam.txtNazovTestu.getText();
+						CreateExam.clicked = false;
+						CreateExam.txtNazovTestu.setText("");
 						
-			System.out.println("Zadaj cislo spravnej moznosti: \n");
-						Integer correctAnswer = sc.nextInt();
-						sc.nextLine();
+					CreateExam.lblZadajNazovTestu.setText("Zadaj moznosti: \n");
+				String[] options = new String[4];
+				
+						for (int i = 0; i < 4; i ++) {
+							do{
+								Thread.sleep(500);	
+								}while(CreateExam.clicked == false);
+								
+							options[i] = CreateExam.txtNazovTestu.getText();
+							CreateExam.clicked = false;
+							CreateExam.txtNazovTestu.setText("");
+						}
+						
+						CreateExam.lblZadajNazovTestu.setText("Zadaj cislo spravnej moznosti: \n");
+						do{
+							Thread.sleep(500);	
+							}while(CreateExam.clicked == false);
+						Integer correctAnswer = Integer.parseInt(CreateExam.txtNazovTestu.getText());
+						CreateExam.clicked = false;
+						CreateExam.txtNazovTestu.setText("");
 					
 					currTest.addQuestion(new MultipleQuestion(question, options, correctAnswer));
 		}
 		if(option == 3) {
-			System.out.println("Zadaj znenie otazky: \n");
-					String question = sc.nextLine();
+			CreateExam.lblZadajNazovTestu.setText("Zadaj znenie otazky: \n");
+			do{
+				Thread.sleep(500);	
+				}while(CreateExam.clicked == false);
+					String question = CreateExam.txtNazovTestu.getText();
+					CreateExam.clicked = false;
+					CreateExam.txtNazovTestu.setText("");
 					
-			System.out.println("Zadaj odpovede na zoradenie: \n");
+					CreateExam.lblZadajNazovTestu.setText("Zadaj odpovede na zoradenie: \n");
 					String[] answers = new String[4];
-						for (int i = 0; i < 4; i ++) 
-								answers[i] = sc.nextLine();
+						for (int i = 0; i < 4; i ++) {
+							do{
+								Thread.sleep(500);	
+								}while(CreateExam.clicked == false);
 							
-			System.out.println("Zadaj spravnu postupnost cisiel: \n");
+								answers[i] = CreateExam.txtNazovTestu.getText();
+								CreateExam.clicked = false;
+								CreateExam.txtNazovTestu.setText("");
+								
+						}
+							
+				CreateExam.lblZadajNazovTestu.setText("Zadaj spravnu postupnost cisiel: \n");
 					int[] order = new int[4];
-						for (int i = 0; i < 4; i ++) 
-								order[i] = sc.nextInt();
+						for (int i = 0; i < 4; i ++) {
 							
+							do{
+								Thread.sleep(500);	
+								}while(CreateExam.clicked == false);
+							
+								order[i] = Integer.parseInt(CreateExam.txtNazovTestu.getText());
+								CreateExam.clicked = false;
+								CreateExam.txtNazovTestu.setText("");
+						}
 					
 						currTest.addQuestion(new OrderQuestion(question, answers, order));	
 					
 		}
 	}
-		sc.close();
+	
 		serializeExam(testy, "exams.ser");		
 	}
 	
@@ -219,6 +285,7 @@ public class Controller {
 	 * pre vybraneho studnta
 	 */
 	public void startExam(int testIndex, int idUser) {
+		
 		
 		List<Exam> testy = deserializeExam("exams.ser");
 		

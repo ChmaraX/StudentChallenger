@@ -27,9 +27,13 @@ public class HotstreakBadge implements Observer {
 				JOptionPane.showMessageDialog(null, "Ziskal si odznak: Hotstreak x7 (+10b)!");
 					actUser.addBadge(new Badge("Hotstreak x7", 10));
 				 }
-			if(hotstreak >= 10) {
+			if(hotstreak == 10) {
 				JOptionPane.showMessageDialog(null, "Ziskal si odznak: Hotstreak x10 (+20b)!");
 					actUser.addBadge(new Badge("Hotstreak x10", 20));
+				 }
+			if(hotstreak > 10) {
+				JOptionPane.showMessageDialog(null, "Ziskal si odznak: Hotstreak x???! (+5b)!");
+					actUser.addBadge(new Badge("Hotstreak x???", 5));
 				 }
 		}
 	
