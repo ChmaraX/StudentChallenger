@@ -20,6 +20,7 @@ public class Student extends Observable implements Serializable, Points{
 	private int hotstreakCount;
 	private int examCount;
 	private int badgesCount;
+	private String skillLevel;
 	
 		
 	
@@ -34,6 +35,7 @@ public class Student extends Observable implements Serializable, Points{
 		this.hotstreakCount = 0;
 		this.examCount = 0;
 		this.badgesCount = 0;
+		this.skillLevel = "Zaciatocnik";
 
 	}
 		
@@ -61,6 +63,14 @@ public class Student extends Observable implements Serializable, Points{
 
 	public String getLastname() {
 		return lastname;
+	}
+	
+	public void setSkillLevel(String level) {
+		this.skillLevel = level;
+	}
+	
+	public String getSkillLevel() {
+		return skillLevel;
 	}
 	
 	
@@ -91,6 +101,8 @@ public class Student extends Observable implements Serializable, Points{
 
 	public void incPoints(int points) {
 		this.points += points;
+		setChanged();
+		notifyObservers(points);
 	}
 	
 	
