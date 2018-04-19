@@ -19,6 +19,7 @@ import badges.BadgeObserver;
 import exams.Exam;
 import exceptions.NoExamsException;
 import gui.Profile;
+import gui.ChooseExam;
 import gui.CreateExam;
 import gui.ExamGUI;
 import questions.MultipleQuestion;
@@ -410,8 +411,10 @@ public class Controller {
 		
 		
 		
-		if(close == 0) 
+		if(close == 0) {
 			ExamGUI.frmTest.dispose();
+			new ChooseExam(idUser);
+		}
 	}
 	
 	 

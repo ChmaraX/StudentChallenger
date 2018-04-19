@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Panel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -24,25 +23,10 @@ public class Ladderboard {
 
 	
 	
-	public static void main(int idUser) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Ladderboard window = new Ladderboard(idUser);
-					window.frmLdr.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-
-	
-	
 	public Ladderboard(int idUser) {
 		initialize();
 		this.idUser = idUser;
+		frmLdr.setVisible(true);
 	}
 
 	
@@ -89,7 +73,7 @@ public class Ladderboard {
 		
 		JButton btnBack = new JButton("Naspat");
 		btnBack.addActionListener(e -> {
-				Main.main(idUser);
+				new Main(idUser);
 				frmLdr.dispose();
 			}
 		);

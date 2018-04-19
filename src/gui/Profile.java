@@ -30,8 +30,7 @@ public class Profile {
 	public JLabel lblSkill;
 	Controller controller = new Controller();
 
-	
-	
+
 	
 	public Profile(int idUser) {
 		initialize();
@@ -40,8 +39,6 @@ public class Profile {
 	
 	}
 
-	
-	
 	
 	private void initialize() {
 		
@@ -105,7 +102,7 @@ public class Profile {
 		
 		JButton btnBack = new JButton("Naspat");
 		btnBack.addActionListener(e -> {
-				Main.main(idUser);
+				new Main(idUser);
 				frmProfile.dispose();
 			}
 		);

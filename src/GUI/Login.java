@@ -85,7 +85,7 @@ public class Login{
 				String username = txtUsername.getText();
 				
 					int idUser = controller.checkLogin(username,password);
-									Main.main(idUser);
+									new Main(idUser);
 									frmLogin.dispose();													
 				
 			}
@@ -100,10 +100,9 @@ public class Login{
 		JButton btnRegister = new JButton("Registracia");
 		btnRegister.setBounds(75, 562, 287, 45);
 		frmLogin.getContentPane().add(btnRegister);
-		btnRegister.addActionListener(e -> {
-			
+		btnRegister.addActionListener(e -> {	
 				try {
-					Register.main(null); 
+					new Register(); 
 					frmLogin.dispose();
 				} catch (Exception e2) {
 					e2.printStackTrace();

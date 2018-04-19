@@ -1,11 +1,8 @@
 package gui;
-import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
-
 import main.Controller;
-
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
 import java.io.IOException;
@@ -21,29 +18,18 @@ public class Register{
 	private JTextField regName;
 	private JTextField regLastname;
 	private JTextField regAge;
-
 	Controller controller = new Controller();
 	
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Register window = new Register();
-					window.frmRegister.setVisible(true);
-					} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 
 	
 	public Register() {
 		initialize();
+		frmRegister.setVisible(true);
 	}
 	
 	
 	private void initialize() {
+		
 		frmRegister = new JFrame();
 		frmRegister.setResizable(false);
 		frmRegister.getContentPane().setBackground(Color.WHITE);

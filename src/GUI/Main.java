@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Panel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,21 +21,6 @@ public class Main {
 
 	
 	
-	public static void main(int idUser) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Main window = new Main(idUser);
-					window.frmMain.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	
-	
 	public Main(int idUser) {
 		initialize();
 		this.idUser = idUser;
@@ -44,6 +28,7 @@ public class Main {
 		Student actUser = studenti.get(idUser);
 		BadgeObserver badgeObserver = new BadgeObserver(actUser);
 		actUser.addObserver(badgeObserver);
+		frmMain.setVisible(true);
 	}
 
 	
@@ -70,7 +55,7 @@ public class Main {
 		
 		JButton btnExams = new JButton("Testy");
 		btnExams.addActionListener(e -> {
-				ChooseExam.main(idUser);
+				new ChooseExam(idUser);
 				frmMain.dispose();
 			}
 		);
@@ -90,7 +75,7 @@ public class Main {
 		
 		JButton btnLadderboard = new JButton("Ladderboard");
 		btnLadderboard.addActionListener(e -> {
-				Ladderboard.main(idUser);
+				new Ladderboard(idUser);
 				frmMain.dispose();
 			}
 		);
@@ -100,7 +85,7 @@ public class Main {
 		
 		JButton btnCreateExam = new JButton("Vytvor test");
 		btnCreateExam.addActionListener(e -> {
-				CreateExam.main(idUser);
+				new CreateExam(idUser);
 				frmMain.dispose();
 			}
 		);

@@ -159,7 +159,7 @@ public class ExamGUI {
 		
 		btnNaspat = new JButton("Naspat");
 		btnNaspat.addActionListener(e -> {
-				ChooseExam.main(idUser);
+				new ChooseExam(idUser);
 				frmTest.dispose();
 			}
 		);

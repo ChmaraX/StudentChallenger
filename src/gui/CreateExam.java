@@ -1,14 +1,11 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Panel;
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingWorker;
-
 import main.Controller;
 import javax.swing.JButton;
 import javax.swing.SwingConstants;
@@ -29,25 +26,10 @@ public class CreateExam {
 	
 
 	
-	
-	public static void main(int idUser) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CreateExam window = new CreateExam(idUser);
-					window.frmCreateExam.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	
-	
 	public CreateExam(int idUser) {
 		initialize();
 		this.idUser = idUser;
+		frmCreateExam.setVisible(true);
 		
 	}
 
@@ -83,7 +65,7 @@ public class CreateExam {
 		
 		JButton btnBack = new JButton("Naspat");
 		btnBack.addActionListener(e -> {
-				Main.main(idUser);
+				new Main(idUser);
 				frmCreateExam.dispose();
 			}
 		);

@@ -1,7 +1,6 @@
 package gui;
 
 import java.awt.Color;
-import java.awt.EventQueue;
 import java.awt.Panel;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
@@ -23,26 +22,10 @@ public class ChooseExam {
 	Controller controller = new Controller();
 	
 	
-	
-
-	public static void main(int idUser) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ChooseExam window = new ChooseExam(idUser);
-					window.frmExams.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-
-	
 	public ChooseExam(int idUser) {
 		initialize();
 		this.idUser = idUser;
+		frmExams.setVisible(true);
 	}
 
 	
@@ -96,7 +79,7 @@ public class ChooseExam {
 		
 		JButton btnBack = new JButton("Naspat");
 		btnBack.addActionListener(e -> {
-				Main.main(idUser);
+				new Main(idUser);
 				frmExams.dispose();
 			}
 		);
