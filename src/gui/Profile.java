@@ -32,6 +32,7 @@ public class Profile {
 	public JLabel txtExamCount;
 	public JLabel txtAge;
 	public JTextArea txtBadges;
+	public JLabel lblSkill;
 	Controller controller = new Controller();
 
 	
@@ -162,6 +163,17 @@ public class Profile {
 		txtAge.setHorizontalAlignment(SwingConstants.RIGHT);
 		txtAge.setBounds(198, 293, 130, 14);
 		frmProfile.getContentPane().add(txtAge);
+		
+		JLabel lblSkillLevel = new JLabel("Skill level:");
+		lblSkillLevel.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSkillLevel.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblSkillLevel.setBounds(248, 392, 57, 14);
+		frmProfile.getContentPane().add(lblSkillLevel);
+		
+		lblSkill = new JLabel("");
+		lblSkill.setHorizontalAlignment(SwingConstants.CENTER);
+		lblSkill.setBounds(229, 418, 99, 14);
+		frmProfile.getContentPane().add(lblSkill);
 		
 		
 		

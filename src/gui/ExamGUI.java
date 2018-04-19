@@ -154,6 +154,8 @@ public class ExamGUI {
 				textField.setVisible(true);
 				progressBar.setVisible(true);
 				
+				
+				
 				controller.startExam(index, idUser);
 				return null;
 			}

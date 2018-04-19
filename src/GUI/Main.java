@@ -7,7 +7,7 @@ import java.awt.Panel;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 
-import badges.HotstreakBadge;
+import badges.BadgeObserver;
 import main.Controller;
 import users.Student;
 
@@ -46,7 +46,7 @@ public class Main {
 		this.idUser = idUser;
 		List<Student> studenti = controller.deserialize("students.ser"); 
 		Student actUser = studenti.get(idUser);
-		HotstreakBadge badgeObserver = new HotstreakBadge(actUser);
+		BadgeObserver badgeObserver = new BadgeObserver(actUser);
 		actUser.addObserver(badgeObserver);
 	}
 

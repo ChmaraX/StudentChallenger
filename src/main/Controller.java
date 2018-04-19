@@ -12,8 +12,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 import badges.Badge;
-import badges.HotstreakBadge;
-import badges.ExamBadge;
+import badges.BadgeObserver;
 import exams.Exam;
 import gui.Profile;
 import gui.CreateExam;
@@ -60,7 +59,8 @@ public class Controller {
 		//List<Student> studenti = new ArrayList<Student>();
 		studenti.add(new Student(username, password, age, name, lastname));
 		
-		/* studenti.clear();  /*--- vycistenie db*/ 
+		
+		//studenti.clear();  /*--- vycistenie db*/ 
 		
 		serialize(studenti,"students.ser");
 				
@@ -296,14 +296,13 @@ public class Controller {
 		List<Student> studenti = deserialize("students.ser"); 
 		Student actUser = studenti.get(idUser);
 		
-		HotstreakBadge badgeObserver = new HotstreakBadge(actUser);
-		ExamBadge examObserver = new ExamBadge(actUser);
+		BadgeObserver badgeObserver = new BadgeObserver(actUser);
 		actUser.addObserver(badgeObserver);
-		actUser.addObserver(examObserver);
-		
+
 		
 		actUser.incPoints(result);
 		actUser.incExamCount();
+		skill(actUser);
 		
 		if(result == testy.get(testIndex).getQuestionCount()) 
 			actUser.incHotstreakCount();
@@ -316,6 +315,23 @@ public class Controller {
 		
 		
 	}
+	
+	public void skill(Student actUser) {
+		
+		int points = actUser.getPoints();
+		
+			if(points >= 15) {
+					actUser.setSkillLevel("Pokrocily");				
+				}
+			if(points >= 100 ) {	
+					actUser.setSkillLevel("Veteran");
+				 }
+			if(points >= 200 ) {		
+					actUser.setSkillLevel("Master");
+				 }
+	}
+	
+	
 	
 	
 	public void showProfileStats(int idUser) {
@@ -360,6 +376,7 @@ public class Controller {
 	    profile.txtBadgeCount.setText(Integer.toString(actUser.getBadgesCount()));
 	    profile.txtExamCount.setText(Integer.toString(actUser.getExamCount()));
 	    profile.txtAge.setText(Integer.toString(actUser.getAge()));
+	    profile.lblSkill.setText(actUser.getSkillLevel());
 	    
 		for(Badge i : actUser.getBadges()){
 			if(i != null)
