@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JProgressBar;
 import javax.swing.ImageIcon;
 import java.awt.Font;
+import javax.swing.JCheckBox;
 
 
 
@@ -34,6 +35,7 @@ public class ExamGUI {
 	public static JLabel txtHint;
 	public static JProgressBar progressBar;
 	public static JLabel lblTimer;
+	public static JCheckBox chckbxCasovacMin;
 	Controller controller = new Controller();
 	private JLabel picture;
 	private JLabel lblTime;
@@ -153,6 +155,11 @@ public class ExamGUI {
 		frmTest.getContentPane().add(lblTime);
 		lblTime.setVisible(false);
 		
+		chckbxCasovacMin = new JCheckBox("Casovac (2x body)");
+		chckbxCasovacMin.setBounds(166, 317, 125, 23);
+		frmTest.getContentPane().add(chckbxCasovacMin);
+		chckbxCasovacMin.setVisible(true);
+		
 		
 		
 		
@@ -168,6 +175,7 @@ public class ExamGUI {
 			@Override
 			protected String doInBackground() throws Exception {
 				btnStart.setVisible(false);
+				chckbxCasovacMin.setVisible(false);
 				btnNext.setVisible(true);
 				textField.setVisible(true);
 				progressBar.setVisible(true);

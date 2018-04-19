@@ -293,13 +293,19 @@ public class Controller {
 		
 		
 		List<Exam> testy = deserializeExam("exams.ser");
-		
-		int duration = 15;
-		 
-		timer(duration);
-	
-		
-		int result = testy.get(testIndex).startExam(); 
+		int result;
+
+		/*
+		 * Ak uzivatel zvoli casovac jeho vysledne body
+		 * sa zdvojnasobia
+		 */
+		if(ExamGUI.chckbxCasovacMin.isSelected()) {
+			timer(60);
+			result = 2 * testy.get(testIndex).startExam();
+		}
+		else {
+			result = testy.get(testIndex).startExam(); 
+		}
 		
 		JOptionPane.showMessageDialog(null, "Vysledny pocet bodov: " + result + "/" + testy.get(testIndex).getQuestionCount());
 
@@ -326,7 +332,7 @@ public class Controller {
 		
 	}
 	
-	static int seconds = 10;
+	static int seconds = 0;
 	public void timer(int duration) {
 		
 		seconds = duration;
