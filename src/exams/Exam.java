@@ -66,7 +66,7 @@ public class Exam implements Serializable,Points {
 			ExamGUI.lblExamName.setText(getName());
 			ExamGUI.progressBar.setMaximum(this.questionCount);
 				
-			
+		
         for (int i = 0; i < this.questionCount; i++) {
             Question qt = this.qt[i];
             	qt.askQuestion();

@@ -8,6 +8,9 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Timer;
+import java.util.TimerTask;
+
 
 import javax.swing.JOptionPane;
 
@@ -279,15 +282,22 @@ public class Controller {
 		return examNames;
 }
 	
-	
+
 	/*
 	 * Zacne a vyhodnoti vybrany test 
 	 * pre vybraneho studnta
 	 */
+	
+
 	public void startExam(int testIndex, int idUser) {
 		
 		
 		List<Exam> testy = deserializeExam("exams.ser");
+		
+		int duration = 15;
+		 
+		timer(duration);
+	
 		
 		int result = testy.get(testIndex).startExam(); 
 		
@@ -315,6 +325,31 @@ public class Controller {
 		
 		
 	}
+	
+	static int seconds = 10;
+	public void timer(int duration) {
+		
+		seconds = duration;
+		
+		Timer timer = new Timer();
+		 TimerTask task = new TimerTask() {
+		 
+		        @Override
+		        public void run() { 
+		        	
+		            if (seconds > 0) {
+		                ExamGUI.lblTimer.setText("" + seconds);
+		                seconds--;
+		            } else {
+		            	JOptionPane.showMessageDialog(null, "Vyprsal cas.");
+		            	ExamGUI.frmTest.dispose();
+		            	cancel();
+		            }
+		        }
+		    };
+		    timer.schedule(task, 0, 1000);
+	}
+	
 	
 	public void skill(Student actUser) {
 		

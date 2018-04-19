@@ -13,6 +13,7 @@ import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import javax.swing.JProgressBar;
 import javax.swing.ImageIcon;
+import java.awt.Font;
 
 
 
@@ -32,8 +33,10 @@ public class ExamGUI {
 	public static JButton btnStart;
 	public static JLabel txtHint;
 	public static JProgressBar progressBar;
+	public static JLabel lblTimer;
 	Controller controller = new Controller();
 	private JLabel picture;
+	private JLabel lblTime;
 	
 	
 	
@@ -136,6 +139,21 @@ public class ExamGUI {
 		frmTest.getContentPane().add(progressBar);
 		progressBar.setVisible(false);
 		
+		lblTimer = new JLabel("");
+		lblTimer.setFont(new Font("Tahoma", Font.PLAIN, 16));
+		lblTimer.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTimer.setBounds(135, 557, 173, 33);
+		frmTest.getContentPane().add(lblTimer);
+		
+		lblTime = new JLabel("Ostavajuci cas:");
+		lblTime.setFont(new Font("Tahoma", Font.BOLD, 11));
+		lblTime.setToolTipText("");
+		lblTime.setHorizontalAlignment(SwingConstants.CENTER);
+		lblTime.setBounds(135, 538, 173, 14);
+		frmTest.getContentPane().add(lblTime);
+		lblTime.setVisible(false);
+		
+		
 		
 		
 	}
@@ -153,7 +171,7 @@ public class ExamGUI {
 				btnNext.setVisible(true);
 				textField.setVisible(true);
 				progressBar.setVisible(true);
-				
+				lblTime.setVisible(true);
 				
 				
 				controller.startExam(index, idUser);
