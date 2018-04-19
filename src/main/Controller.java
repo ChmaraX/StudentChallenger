@@ -17,6 +17,7 @@ import javax.swing.JOptionPane;
 import badges.Badge;
 import badges.BadgeObserver;
 import exams.Exam;
+import exceptions.NoExamsException;
 import gui.Profile;
 import gui.CreateExam;
 import gui.ExamGUI;
@@ -271,10 +272,22 @@ public class Controller {
 	}
 	
 
-	public String[] examNames() {
+	public String[] examNames()  {
 		
 		List<Exam> testy = deserializeExam("exams.ser");
 		String[] examNames = new String[testy.size()];
+		
+		/*
+		 * Catching created exception if there
+		 * are no exams available
+		 */
+		if(testy.size() == 0) {
+			try {
+				throw new NoExamsException();
+			} catch (NoExamsException e) {
+				e.printStackTrace();
+			}
+		}
 				
 		for(int i = 0 ; i < testy.size(); i++) {
 			examNames[i] = testy.get(i).getName();

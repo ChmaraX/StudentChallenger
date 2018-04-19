@@ -36,6 +36,7 @@ public class ExamGUI {
 	public static JProgressBar progressBar;
 	public static JLabel lblTimer;
 	public static JCheckBox chckbxCasovacMin;
+	public static JButton btnNaspat;
 	Controller controller = new Controller();
 	private JLabel picture;
 	private JLabel lblTime;
@@ -160,6 +161,17 @@ public class ExamGUI {
 		frmTest.getContentPane().add(chckbxCasovacMin);
 		chckbxCasovacMin.setVisible(true);
 		
+		btnNaspat = new JButton("Naspat");
+		btnNaspat.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				ChooseExam.main(idUser);
+				frmTest.dispose();
+			}
+		});
+		btnNaspat.setBounds(184, 601, 89, 23);
+		frmTest.getContentPane().add(btnNaspat);
+		
+		
 		
 		
 		
@@ -176,6 +188,7 @@ public class ExamGUI {
 			protected String doInBackground() throws Exception {
 				btnStart.setVisible(false);
 				chckbxCasovacMin.setVisible(false);
+				btnNaspat.setVisible(false);
 				btnNext.setVisible(true);
 				textField.setVisible(true);
 				progressBar.setVisible(true);

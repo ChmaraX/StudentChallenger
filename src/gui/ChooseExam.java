@@ -91,6 +91,7 @@ public class ChooseExam {
 				int index = list.getSelectedIndex();
 				@SuppressWarnings("unused")
 				ExamGUI window = new ExamGUI(index, idUser);
+				frmExams.dispose();
 											
 			}
 		});
