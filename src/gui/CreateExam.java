@@ -11,8 +11,6 @@ import javax.swing.SwingWorker;
 
 import main.Controller;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
 import javax.swing.JTextField;
 import java.awt.Font;
@@ -76,21 +74,19 @@ public class CreateExam {
 		panel.add(picture);
 		
 		btnCreateExam = new JButton("Vytvor test");
-		btnCreateExam.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnCreateExam.addActionListener(e -> {
 				start();
 			}
-		});
+		);
 		btnCreateExam.setBounds(131, 173, 167, 36);
 		frmCreateExam.getContentPane().add(btnCreateExam);
 		
 		JButton btnBack = new JButton("Naspat");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnBack.addActionListener(e -> {
 				Main.main(idUser);
 				frmCreateExam.dispose();
 			}
-		});
+		);
 		btnBack.setBounds(177, 602, 89, 23);
 		frmCreateExam.getContentPane().add(btnBack);
 		
@@ -109,11 +105,10 @@ public class CreateExam {
 		
 		btnPotvrd = new JButton("Potvrd");
 		btnPotvrd.setVisible(false);
-		btnPotvrd.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnPotvrd.addActionListener(e -> {
 				clicked = true;
 			}
-		});
+		);
 		btnPotvrd.setBounds(177, 350, 89, 23);
 		frmCreateExam.getContentPane().add(btnPotvrd);
 		

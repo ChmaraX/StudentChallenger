@@ -3,8 +3,6 @@ package gui;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Panel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.DefaultListModel;
 import javax.swing.JFrame;
 import javax.swing.JList;
@@ -85,8 +83,7 @@ public class ChooseExam {
 				
 		btnChoose = new JButton("Vyber");
 		btnChoose.setBounds(164, 506, 89, 23);
-		btnChoose.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnChoose.addActionListener(e -> {
 				//prepne do TestGUI s indexom vybraneho testu
 				int index = list.getSelectedIndex();
 				@SuppressWarnings("unused")
@@ -94,16 +91,15 @@ public class ChooseExam {
 				frmExams.dispose();
 											
 			}
-		});
+		);
 		frmExams.getContentPane().add(btnChoose);
 		
 		JButton btnBack = new JButton("Naspat");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnBack.addActionListener(e -> {
 				Main.main(idUser);
 				frmExams.dispose();
 			}
-		});
+		);
 		btnBack.setBounds(164, 540, 89, 23);
 		frmExams.getContentPane().add(btnBack);
 		

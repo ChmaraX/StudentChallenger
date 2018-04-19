@@ -3,23 +3,17 @@ package gui;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Panel;
-
-
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-
 import javax.swing.table.DefaultTableModel;
-
-
 import main.Controller;
 import javax.swing.SwingConstants;
 import java.awt.Font;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
 
 public class Ladderboard {
 
@@ -94,12 +88,11 @@ public class Ladderboard {
 		frmLdr.getContentPane().add(lblLdr);
 		
 		JButton btnBack = new JButton("Naspat");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnBack.addActionListener(e -> {
 				Main.main(idUser);
 				frmLdr.dispose();
 			}
-		});
+		);
 		btnBack.setBounds(175, 605, 89, 23);
 		frmLdr.getContentPane().add(btnBack);
 		

@@ -8,9 +8,7 @@ import main.Controller;
 
 import javax.swing.JPasswordField;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.Panel;
 import javax.swing.ImageIcon;
@@ -106,9 +104,7 @@ public class Register{
 		JButton btnRegister = new JButton("Zaregistruj");
 		btnRegister.setBounds(75, 516, 287, 45);
 		frmRegister.getContentPane().add(btnRegister);
-		btnRegister.addActionListener(new ActionListener() {
-			
-			public void actionPerformed(ActionEvent e) {
+		btnRegister.addActionListener(e -> {
 				try {
 					
 					@SuppressWarnings("deprecation")
@@ -125,19 +121,18 @@ public class Register{
 				}	
 			}
 			
-		});
+		);
 		
 
 		
 		JButton btnLogin = new JButton("Prihlasenie");
 		btnLogin.setBounds(75, 562, 287, 45);
 		frmRegister.getContentPane().add(btnLogin);
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnLogin.addActionListener(e -> {
 				Login.main(null);
 				frmRegister.dispose();
 			}
-		});
+		);
 		
 		
 		

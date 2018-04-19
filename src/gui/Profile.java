@@ -8,17 +8,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
-
 import java.awt.Font;
 import javax.swing.SwingConstants;
-
 import main.Controller;
-
-
 import javax.swing.JButton;
 import javax.swing.JSeparator;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+
 
 public class Profile {
 
@@ -109,12 +104,11 @@ public class Profile {
 		
 		
 		JButton btnBack = new JButton("Naspat");
-		btnBack.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnBack.addActionListener(e -> {
 				Main.main(idUser);
 				frmProfile.dispose();
 			}
-		});
+		);
 		btnBack.setBounds(184, 580, 89, 23);
 		frmProfile.getContentPane().add(btnBack);
 		

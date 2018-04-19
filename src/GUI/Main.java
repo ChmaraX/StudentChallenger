@@ -3,19 +3,15 @@ package gui;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Panel;
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-
 import badges.BadgeObserver;
 import main.Controller;
 import users.Student;
-
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import java.awt.event.ActionListener;
 import java.util.List;
-import java.awt.event.ActionEvent;
+
 
 
 public class Main {
@@ -73,45 +69,41 @@ public class Main {
 		
 		
 		JButton btnExams = new JButton("Testy");
-		btnExams.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnExams.addActionListener(e -> {
 				ChooseExam.main(idUser);
 				frmMain.dispose();
 			}
-		});
+		);
 		btnExams.setBounds(75, 380, 287, 45);
 		frmMain.getContentPane().add(btnExams);
 		
 		
 		JButton btnProfile = new JButton("Profil");
-		btnProfile.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnProfile.addActionListener(e -> {
 				controller.showProfile(idUser);
 				frmMain.dispose();
 				}
-		});
+		);
 		btnProfile.setBounds(75, 436, 287, 45);
 		frmMain.getContentPane().add(btnProfile);
 		
 		
 		JButton btnLadderboard = new JButton("Ladderboard");
-		btnLadderboard.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnLadderboard.addActionListener(e -> {
 				Ladderboard.main(idUser);
 				frmMain.dispose();
 			}
-		});
+		);
 		btnLadderboard.setBounds(75, 492, 287, 45);
 		frmMain.getContentPane().add(btnLadderboard);
 		
 		
 		JButton btnCreateExam = new JButton("Vytvor test");
-		btnCreateExam.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnCreateExam.addActionListener(e -> {
 				CreateExam.main(idUser);
 				frmMain.dispose();
 			}
-		});
+		);
 		btnCreateExam.setBounds(75, 548, 287, 45);
 		frmMain.getContentPane().add(btnCreateExam);
 		

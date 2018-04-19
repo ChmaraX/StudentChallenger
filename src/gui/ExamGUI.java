@@ -2,8 +2,6 @@ package gui;
 
 import java.awt.Color;
 import java.awt.Panel;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import main.Controller;
 import javax.swing.JTextField;
 import javax.swing.SwingWorker;
@@ -79,21 +77,19 @@ public class ExamGUI {
 		btnNext.setBounds(135, 454, 173, 47);
 		btnNext.setVisible(false);
 		frmTest.getContentPane().add(btnNext);
-		btnNext.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnNext.addActionListener(e -> {
 				clicked = true;
 			}
-		});
+		);
 		frmTest.getContentPane().add(btnNext);
 			
 				
 		
 		btnStart = new JButton("Start");
-		btnStart.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
+		btnStart.addActionListener(e -> {
 				start();  // novy thread - SwingWorker
 			}
-		});
+		);
 		btnStart.setBounds(135, 209, 173, 101);
 		frmTest.getContentPane().add(btnStart);
 		
@@ -162,12 +158,11 @@ public class ExamGUI {
 		chckbxCasovacMin.setVisible(true);
 		
 		btnNaspat = new JButton("Naspat");
-		btnNaspat.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnNaspat.addActionListener(e -> {
 				ChooseExam.main(idUser);
 				frmTest.dispose();
 			}
-		});
+		);
 		btnNaspat.setBounds(184, 601, 89, 23);
 		frmTest.getContentPane().add(btnNaspat);
 		
