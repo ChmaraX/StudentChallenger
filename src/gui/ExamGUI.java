@@ -87,7 +87,7 @@ public class ExamGUI {
 		
 		btnStart = new JButton("Start");
 		btnStart.addActionListener(e -> {
-				start();  // novy thread - SwingWorker
+				start();  // new thread - SwingWorker
 			}
 		);
 		btnStart.setBounds(135, 209, 173, 101);
@@ -95,7 +95,7 @@ public class ExamGUI {
 		
 		
 		
-		/// Prvy ktore sa budu dynamicky menit ///
+		/// Dynamically changing units ///
 		
 		textField = new JTextField();
 		textField.setBounds(90, 352, 258, 33);
@@ -173,8 +173,8 @@ public class ExamGUI {
 	}
 	
 	/*
-	 * Zacne novy thread s aplikacnou logikou testu
-	 * dynamicky meni GUI podla potreby
+	 * Starts a new thread with 
+	 * loop method going on background
 	 */
 	private void start() {
 		SwingWorker<String, String> worker = new SwingWorker<String, String>() {
@@ -195,8 +195,8 @@ public class ExamGUI {
 			}
 			
 			/*
-			 * Po dokonceni doInBackground procesu
-			 * vypise zmeneni stav profilu uzivatela
+			 * After startExam method is finished
+			 * shows user profile stats
 			 */
 			@Override
 			protected void done() {				

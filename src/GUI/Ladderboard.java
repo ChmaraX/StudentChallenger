@@ -63,7 +63,7 @@ public class Ladderboard {
 		DefaultTableModel tableModel = new DefaultTableModel(controller.studentTableData(), columns);
 		table.setModel(tableModel);
 		
-		table.setAutoCreateRowSorter(true); // sortuje tabulku podla vybraneho parametra
+		table.setAutoCreateRowSorter(true);
 		
 		JLabel lblLdr = new JLabel("Ladderboard");
 		lblLdr.setFont(new Font("Tahoma", Font.BOLD, 15));

@@ -31,6 +31,7 @@ public class ChooseExam {
 	
 	
 	private void initialize() {
+		
 		frmExams = new JFrame();
 		frmExams.setResizable(false);
 		frmExams.getContentPane().setBackground(Color.WHITE);
@@ -51,9 +52,8 @@ public class ChooseExam {
 		
 	
 		/*
-		 * Prida nazvy testov do Jlistu 
-		 */
-		
+		 * Adds exam names into Jlist
+		 */	
 		String[] examNames = controller.examNames();
 		model = new DefaultListModel<String>();
 		list = new JList<String>(model);
@@ -67,10 +67,9 @@ public class ChooseExam {
 		btnChoose = new JButton("Vyber");
 		btnChoose.setBounds(164, 506, 89, 23);
 		btnChoose.addActionListener(e -> {
-				//prepne do TestGUI s indexom vybraneho testu
+				//opens ExamGUI thread with selected exam as parameter
 				int index = list.getSelectedIndex();
-				@SuppressWarnings("unused")
-				ExamGUI window = new ExamGUI(index, idUser);
+					new ExamGUI(index, idUser);
 				frmExams.dispose();
 											
 			}

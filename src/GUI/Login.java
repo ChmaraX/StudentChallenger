@@ -69,12 +69,7 @@ public class Login{
 		txtPassword.setBounds(75, 460, 287, 35);
 		frmLogin.getContentPane().add(txtPassword);
 
-		
-		/*
-		 * Button prihlasenie
-		 * skontroluje platnost zadanych udajov
-		 */
-		
+			
 		JButton btnLogin = new JButton("Prihlasit "); 
 		btnLogin.setBounds(75, 516, 287, 45);
 		frmLogin.getContentPane().add(btnLogin);
@@ -92,11 +87,7 @@ public class Login{
 		);
 		
 				
-		/*
-		 * register button
-		 * prepnutie do noveho okna Register
-		 * zatvorenie okna Login
-		 */
+
 		JButton btnRegister = new JButton("Registracia");
 		btnRegister.setBounds(75, 562, 287, 45);
 		frmLogin.getContentPane().add(btnRegister);
@@ -110,10 +101,7 @@ public class Login{
 			}
 		);
 	
-	
-		/*
-		 * Obrazok
-		 */
+
 		Panel panel = new Panel(); 
 		panel.setBackground(Color.LIGHT_GRAY);
 		panel.setBounds(0, 0, 436, 331);

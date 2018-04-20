@@ -32,7 +32,9 @@ import users.Student;
 public class Controller {
 
 		
-	
+	/*
+	 * Saves user data
+	 */
 	public void serialize(List<Student> sList, String fileName) {
 		try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName))) {
 			out.writeObject(sList);
@@ -42,7 +44,9 @@ public class Controller {
 		}
 	} 
 	
-	
+	/*
+	 * Loads user data
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Student> deserialize(String fileName) {
 		List<Student> sList = null; 
@@ -56,16 +60,18 @@ public class Controller {
 	}
 	
 	
+	/*
+	 * Adds new student to list / registration
+	 */
 	public void addStudent(String username, String password, int age, String name, String lastname) 
 			throws FileNotFoundException, IOException, ClassNotFoundException {
 						
 	
 		List<Student> studenti = deserialize("students.ser"); 
-		//List<Student> studenti = new ArrayList<Student>();
 		studenti.add(new Student(username, password, age, name, lastname));
 		
 		
-		//studenti.clear();  /*--- vycistenie db*/ 
+		//studenti.clear();  /*--- clears list*/ 
 		
 		serialize(studenti,"students.ser");
 				
@@ -76,12 +82,10 @@ public class Controller {
 	}
 	
 	
+	/*
+	 * Checks if student exists in list / Login
+	 */
 	public int checkLogin(String username, String password) {
-		/*
-		 * overí èi dany uzivatel existuje 
-		 * ak ano tak vrati jeho poradove cislo v liste
-		 */
-		
 		
 		List<Student> studenti = deserialize("students.ser"); 
 			
@@ -95,7 +99,9 @@ public class Controller {
 		return -1;
 			}
 
-	
+	/*
+	 * Saves exam data
+	 */
 	public void serializeExam(List<Exam> tList, String fileName) {
 		try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName))) {
 			out.writeObject(tList);
@@ -105,7 +111,9 @@ public class Controller {
 		}
 	} 
 	
-	
+	/*
+	 * Loads exam data
+	 */
 	@SuppressWarnings("unchecked")
 	public List<Exam> deserializeExam(String fileName) {
 		List<Exam> tList = null; 
@@ -118,7 +126,11 @@ public class Controller {
 		return tList;
 	}
 	
-	
+	/*
+	 * Creates new exam
+	 * User can choose exam name + questions to be included
+	 * as well as type of questions
+	 */
 	public void createExam() throws InterruptedException {
 		
 		List<Exam> testy = deserializeExam("exams.ser");
@@ -133,14 +145,14 @@ public class Controller {
 		do{
 		Thread.sleep(500);	
 		}while(CreateExam.clicked == false);
-		//caka na kliknutie tlacidla pre vytvorenie testu
+		// Waits for button to be clicked
 		String examName = CreateExam.txtNazovTestu.getText(); 				
 		testy.add(new Exam(examName));
 		CreateExam.txtNazovTestu.setText("");
 		CreateExam.clicked = false;
 		
 		
-		Exam currTest = testy.get(testy.size() - 1); // zisti poradie aktualneho testu
+		Exam currTest = testy.get(testy.size() - 1); 
 		int option = -1;
 			
 		while(option != 0) {
@@ -251,6 +263,11 @@ public class Controller {
 		serializeExam(testy, "exams.ser");		
 	}
 	
+	/*
+	 * Temporary function
+	 * creates new exam without typing
+	 * in GUI
+	 */
 	public void docasnaFunkcia() {
 		//List<Exam> testy = new ArrayList<Exam>();
 		
@@ -272,7 +289,9 @@ public class Controller {
 		System.out.println(testy2);
 	}
 	
-
+	/*
+	 * Returns all names of exams 
+	 */
 	public String[] examNames()  {
 		
 		List<Exam> testy = deserializeExam("exams.ser");
@@ -298,11 +317,10 @@ public class Controller {
 	
 
 	/*
-	 * Zacne a vyhodnoti vybrany test 
-	 * pre vybraneho studnta
+	 * Starts an exam with specific exam and actual
+	 * user as a parameter.
+	 * Adds result (points,badges) to user
 	 */
-	
-
 	public void startExam(int testIndex, int idUser) {
 		
 		
@@ -310,8 +328,8 @@ public class Controller {
 		int result;
 
 		/*
-		 * Ak uzivatel zvoli casovac jeho vysledne body
-		 * sa zdvojnasobia
+		 * Toggling timer doubles the final amount
+		 * of points
 		 */
 		if(ExamGUI.chckbxCasovacMin.isSelected()) {
 			timer(60);
@@ -346,6 +364,11 @@ public class Controller {
 		
 	}
 	
+	
+	/*
+	 * Stars a new TimerTask countdown 
+	 * with seconds as a parameter
+	 */
 	static int seconds = 0;
 	public void timer(int duration) {
 		
@@ -361,7 +384,7 @@ public class Controller {
 		                ExamGUI.lblTimer.setText("" + seconds);
 		                seconds--;
 		            } else {
-		            	JOptionPane.showMessageDialog(null, "Vyprsal cas.");
+		            	ExamGUI.lblTimer.setText("Vyprsal cas.");
 		            	ExamGUI.frmTest.dispose();
 		            	cancel();
 		            }
@@ -370,7 +393,10 @@ public class Controller {
 		    timer.schedule(task, 0, 1000);
 	}
 	
-	
+	/*
+	 * Set user skill level according
+	 * to actual points
+	 */
 	public void skill(Student actUser) {
 		
 		int points = actUser.getPoints();
@@ -388,7 +414,10 @@ public class Controller {
 	
 	
 	
-	
+	/*
+	 * Shows user profile stats at the
+	 * end of the exam
+	 */
 	public void showProfileStats(int idUser) {
 		
 		List<Student> studenti = deserialize("students.ser"); 
@@ -418,7 +447,9 @@ public class Controller {
 	}
 	
 	 
-
+	/*
+	 * Shows actual user profile 
+	 */
 	public void showProfile(int idUser) {
 		
 		Profile profile = new Profile(idUser);
@@ -442,7 +473,10 @@ public class Controller {
 		
 	}
 	
-	
+	/*
+	 * Returns matrix for Table 
+	 * used in Ladderboard
+	 */
 	public String[][] studentTableData() {
 		
 		List<Student> studenti = deserialize("students.ser"); 
@@ -451,7 +485,6 @@ public class Controller {
 		String[][] studentData = new String[studenti.size()][7];
 		int i = 0;
 		for (Student sd : studenti) {
-			//udaje kazdeho ziaka zvlast v cykle
 			
 		
 	        String[] stdata = new String[7];
@@ -463,9 +496,7 @@ public class Controller {
 	        stdata[5] = Integer.toString(sd.getExamCount());
 
 	        studentData[i++] = stdata;
-	        //premiestni 6 udajov o jednom studentovi do prislusneho riadku matice
 	    }
-
 
 		return studentData;
 		

@@ -37,7 +37,7 @@ public class Register{
 		frmRegister.setBounds(200, 100, 439, 665);
 		frmRegister.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmRegister.getContentPane().setLayout(null);
-		frmRegister.setLocationRelativeTo(null); // center okna do stredu 
+		frmRegister.setLocationRelativeTo(null);
 
 		JLabel lblRegName = new JLabel("Prihlasovacie meno:");
 		lblRegName.setBounds(93, 268, 157, 14);
@@ -100,7 +100,7 @@ public class Register{
 					String lastname = regLastname.getText(); 
 					int age = Integer.parseInt(regAge.getText());
 							
-					controller.addStudent(username,password,age,name,lastname); //prida a ulozi udaje studenta 
+					controller.addStudent(username,password,age,name,lastname); 
 					
 				} catch (ClassNotFoundException | IOException e1) {
 					e1.printStackTrace();
