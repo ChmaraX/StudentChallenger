@@ -31,8 +31,10 @@ import users.Student;
 public class Controller {
 
 		
-	/*
-	 * Saves user data
+	/**
+	 * Saves user data 
+	 * @param sList - List of all students
+	 * @param fileName - file where the data is stored
 	 */
 	public void serialize(List<Student> sList, String fileName) {
 		try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName))) {
@@ -43,8 +45,10 @@ public class Controller {
 		}
 	} 
 	
-	/*
+	/**
 	 * Loads user data
+	 * @param fileName - file where the data is stored
+	 * @return List of all students
 	 */
 	@SuppressWarnings("unchecked")
 	public List<Student> deserialize(String fileName) {
@@ -59,8 +63,16 @@ public class Controller {
 	}
 	
 	
-	/*
-	 * Adds new student to list / registration
+	/**
+	 * Creates a new student object
+	 * @param username 
+	 * @param password
+	 * @param age
+	 * @param name
+	 * @param lastname
+	 * @throws FileNotFoundException
+	 * @throws IOException
+	 * @throws ClassNotFoundException
 	 */
 	public void addStudent(String username, String password, int age, String name, String lastname) 
 			throws FileNotFoundException, IOException, ClassNotFoundException {
@@ -81,8 +93,11 @@ public class Controller {
 	}
 	
 	
-	/*
-	 * Checks if student exists in list / Login
+	/**
+	 * Checks if user input match user data / login
+	 * @param username
+	 * @param password
+	 * @return index of user if true
 	 */
 	public int checkLogin(String username, String password) {
 		
@@ -125,10 +140,10 @@ public class Controller {
 		return tList;
 	}
 	
-	/*
-	 * Creates new exam
-	 * User can choose exam name + questions to be included
-	 * as well as type of questions
+	/**
+	 * Creates a new exam with chosen questions,
+	 * question type, and name.
+	 * @throws InterruptedException
 	 */
 	public void createExam() throws InterruptedException {
 		
@@ -288,8 +303,9 @@ public class Controller {
 		System.out.println(testy2);
 	}
 	
-	/*
-	 * Returns all names of exams 
+	/**
+	 * Iterates exam object names into string array
+	 * @return Array of strings with exam names
 	 */
 	public String[] examNames()  {
 		
@@ -315,10 +331,11 @@ public class Controller {
 }
 	
 
-	/*
-	 * Starts an exam with specific exam and actual
-	 * user as a parameter.
-	 * Adds result (points,badges) to user
+	/**
+	 * Starts and exam and adds results 
+	 * (badges,points,hotstreaks...) to the user
+	 * @param testIndex index of selected exam
+	 * @param idUser id of current logged user
 	 */
 	public void startExam(int testIndex, int idUser) {
 		
@@ -364,9 +381,8 @@ public class Controller {
 	}
 	
 	
-	/*
-	 * Stars a new TimerTask countdown 
-	 * with seconds as a parameter
+	/**
+	 * Stars a new TimerTask countdown with seconds as a parameter
 	 */
 	static int seconds = 0;
 	public void timer(int duration) {
@@ -392,9 +408,9 @@ public class Controller {
 		    timer.schedule(task, 0, 1000);
 	}
 	
-	/*
-	 * Set user skill level according
-	 * to actual points
+	/**
+	 * Set user skill level according to actual points
+	 * @param actUser current logged user
 	 */
 	public void skill(Student actUser) {
 		
@@ -413,9 +429,9 @@ public class Controller {
 	
 	
 	
-	/*
-	 * Shows user profile stats at the
-	 * end of the exam
+	/**
+	 * Shows user profile stats at the end of the exam
+	 * @param idUser id of current logged user
 	 */
 	public void showProfileStats(int idUser) {
 		
@@ -445,8 +461,9 @@ public class Controller {
 	}
 	
 	 
-	/*
-	 * Shows actual user profile 
+	/**
+	 * Shows actual user profile
+	 * @param idUser id of current logged user
 	 */
 	public void showProfile(int idUser) {
 		
@@ -471,9 +488,8 @@ public class Controller {
 		
 	}
 	
-	/*
-	 * Returns matrix for Table 
-	 * used in Ladderboard
+	/**
+	 * @return matrix for Table used in Ladderboard
 	 */
 	public String[][] studentTableData() {
 		
