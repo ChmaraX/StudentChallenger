@@ -19,7 +19,6 @@ import badges.BadgeObserver;
 import exams.Exam;
 import exceptions.NoExamsException;
 import gui.Profile;
-import gui.ChooseExam;
 import gui.CreateExam;
 import gui.ExamGUI;
 import questions.MultipleQuestion;
@@ -332,7 +331,7 @@ public class Controller {
 		 * of points
 		 */
 		if(ExamGUI.chckbxCasovacMin.isSelected()) {
-			timer(60);
+			timer(20);
 			result = 2 * testy.get(testIndex).startExam();
 		}
 		else {
@@ -352,7 +351,7 @@ public class Controller {
 		actUser.incExamCount();
 		skill(actUser);
 		
-		if(result == testy.get(testIndex).getQuestionCount()) 
+		if(result >= testy.get(testIndex).getQuestionCount()) 
 			actUser.incHotstreakCount();
 		else
 			actUser.nullHotstreakCount();
@@ -442,7 +441,6 @@ public class Controller {
 		
 		if(close == 0) {
 			ExamGUI.frmTest.dispose();
-			new ChooseExam(idUser);
 		}
 	}
 	

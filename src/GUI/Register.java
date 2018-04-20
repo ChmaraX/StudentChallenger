@@ -1,6 +1,7 @@
 package gui;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import main.Controller;
 import javax.swing.JPasswordField;
@@ -99,12 +100,17 @@ public class Register{
 					String name = regName.getText(); 
 					String lastname = regLastname.getText(); 
 					int age = Integer.parseInt(regAge.getText());
+					
+					if(username.isEmpty() || password.isEmpty() || name.isEmpty() )
+						JOptionPane.showMessageDialog(null, "Vypln potrebne udaje!");
 							
 					controller.addStudent(username,password,age,name,lastname); 
 					
 				} catch (ClassNotFoundException | IOException e1) {
 					e1.printStackTrace();
 				}	
+				Login.main(null);
+				frmRegister.dispose();				
 			}
 			
 		);

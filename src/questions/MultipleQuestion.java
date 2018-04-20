@@ -1,7 +1,7 @@
 package questions;
+
 import java.awt.Color;
 import java.util.Arrays;
-import java.util.Objects;
 
 import gui.ExamGUI;
 
@@ -64,7 +64,7 @@ public class MultipleQuestion extends Question {
 		ExamGUI.textField.setText("");
 		ExamGUI.clicked = false;
 				
-		if( Objects.equals(getSingleOption(getAnswer()),userInput) ) {
+		if( userInput.equalsIgnoreCase(getSingleOption(getAnswer())) ) {
 			ExamGUI.lblIndicator.setText("Spravna odpoved!");
 			ExamGUI.lblIndicator.setForeground(Color.GREEN);
 			ExamGUI.txtHint.setText("");

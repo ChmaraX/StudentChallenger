@@ -153,13 +153,13 @@ public class ExamGUI {
 		lblTime.setVisible(false);
 		
 		chckbxCasovacMin = new JCheckBox("Casovac (2x body)");
-		chckbxCasovacMin.setBounds(166, 317, 125, 23);
+		chckbxCasovacMin.setHorizontalAlignment(SwingConstants.CENTER);
+		chckbxCasovacMin.setBounds(135, 317, 173, 23);
 		frmTest.getContentPane().add(chckbxCasovacMin);
 		chckbxCasovacMin.setVisible(true);
 		
 		btnNaspat = new JButton("Naspat");
 		btnNaspat.addActionListener(e -> {
-				new ChooseExam(idUser);
 				frmTest.dispose();
 			}
 		);

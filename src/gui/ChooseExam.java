@@ -70,7 +70,7 @@ public class ChooseExam {
 				//opens ExamGUI thread with selected exam as parameter
 				int index = list.getSelectedIndex();
 					new ExamGUI(index, idUser);
-				frmExams.dispose();
+				//frmExams.dispose();
 											
 			}
 		);

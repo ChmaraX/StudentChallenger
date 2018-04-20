@@ -1,7 +1,6 @@
 package questions;
 
 import java.awt.Color;
-import java.util.Objects;
 
 import gui.ExamGUI;
 
@@ -62,7 +61,7 @@ public class SimpleQuestion extends Question {
 		 * Zisti ci sa uzivatelov vstup zhoduje
 		 * so spravnou odpovedou
 		 */
-		if( Objects.equals(getAnswer(),userInput) ) {
+		if( userInput.equalsIgnoreCase(getAnswer()) ) {
 			ExamGUI.lblIndicator.setText("Spravna odpoved!");
 			ExamGUI.lblIndicator.setForeground(Color.GREEN);
 			return true;
