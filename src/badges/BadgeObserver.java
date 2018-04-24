@@ -57,7 +57,7 @@ public class BadgeObserver implements Observer {
 	
 	
 	
-	void podmienkaEC(int examCount) {
+	void podmienkaEC(short examCount) {
 		
 		if(examCount == 3) {
 			JOptionPane.showMessageDialog(null, "Ziskal si odznak: First three! (+5b)!");

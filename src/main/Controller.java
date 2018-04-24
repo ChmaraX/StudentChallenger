@@ -25,6 +25,7 @@ import questions.MultipleQuestion;
 import questions.SimpleQuestion;
 import questions.OrderQuestion;
 import users.Student;
+import users.User;
 
 
 
@@ -36,11 +37,11 @@ public class Controller {
 	 * @param sList - List of all students
 	 * @param fileName - file where the data is stored
 	 */
-	public void serialize(List<Student> sList, String fileName) {
+	public void serialize(List<User> sList, String fileName) {
 		try(ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(fileName))) {
 			out.writeObject(sList);
 		} catch(IOException ex) {
-			System.out.println("Problem pri serializacii studentov");
+			System.out.println("Problem pri serializacii uzivatelov");
 			System.out.println(ex.getMessage());
 		}
 	} 
@@ -48,15 +49,15 @@ public class Controller {
 	/**
 	 * Loads user data
 	 * @param fileName - file where the data is stored
-	 * @return List of all students
+	 * @return List of all users
 	 */
 	@SuppressWarnings("unchecked")
-	public List<Student> deserialize(String fileName) {
-		List<Student> sList = null; 
+	public List<User> deserialize(String fileName) {
+		List<User> sList = null; 
 		try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(fileName))) {
-			sList = (List<Student>) in.readObject();
+			sList = (List<User>) in.readObject();
 		} catch (IOException | ClassNotFoundException ex) {
-			System.out.printf("Problem pri deserializacii studentov", fileName); 
+			System.out.printf("Problem pri deserializacii uzivatelov", fileName); 
 			System.out.println(ex.getMessage());
 		}
 		return sList;
@@ -64,7 +65,7 @@ public class Controller {
 	
 	
 	/**
-	 * Creates a new student object
+	 * Creates a new user object
 	 * @param username 
 	 * @param password
 	 * @param age
@@ -78,7 +79,8 @@ public class Controller {
 			throws FileNotFoundException, IOException, ClassNotFoundException {
 						
 	
-		List<Student> studenti = deserialize("students.ser"); 
+
+		List<User> studenti = deserialize("students.ser"); 
 		studenti.add(new Student(username, password, age, name, lastname));
 		
 		
@@ -87,7 +89,7 @@ public class Controller {
 		serialize(studenti,"students.ser");
 				
 		
-		List<Student> newList = deserialize("students.ser");
+		List<User> newList = deserialize("students.ser");
 		System.out.println("Novy list:  " + newList);
 	
 	}
@@ -101,7 +103,7 @@ public class Controller {
 	 */
 	public int checkLogin(String username, String password) {
 		
-		List<Student> studenti = deserialize("students.ser"); 
+		List<User> studenti = deserialize("students.ser"); 
 			
 		for (int i = 0; i < studenti.size(); i++) {
 			
@@ -357,8 +359,8 @@ public class Controller {
 		
 		JOptionPane.showMessageDialog(null, "Vysledny pocet bodov: " + result + "/" + testy.get(testIndex).getQuestionCount());
 
-		List<Student> studenti = deserialize("students.ser"); 
-		Student actUser = studenti.get(idUser);
+		List<User> studenti = deserialize("students.ser"); 
+		Student actUser = (Student) studenti.get(idUser);
 		
 		BadgeObserver badgeObserver = new BadgeObserver(actUser);
 		actUser.addObserver(badgeObserver);
@@ -435,8 +437,8 @@ public class Controller {
 	 */
 	public void showProfileStats(int idUser) {
 		
-		List<Student> studenti = deserialize("students.ser"); 
-		Student actUser = studenti.get(idUser);
+		List<User> studenti = deserialize("students.ser"); 
+		Student actUser = (Student) studenti.get(idUser);
 		
 		ArrayList<String> list = new ArrayList<String>();
 		for(Badge i : actUser.getBadges()){
@@ -468,8 +470,8 @@ public class Controller {
 	public void showProfile(int idUser) {
 		
 		Profile profile = new Profile(idUser);
-		List<Student> studenti = deserialize("students.ser"); 
-		Student actUser = studenti.get(idUser);
+		List<User> studenti = deserialize("students.ser"); 
+		Student actUser = (Student)studenti.get(idUser);
 		
 		
 		profile.lblNickname.setText(actUser.getUsername());
@@ -493,12 +495,12 @@ public class Controller {
 	 */
 	public String[][] studentTableData() {
 		
-		List<Student> studenti = deserialize("students.ser"); 
+		List<User> studenti = deserialize("students.ser"); 
 
 		
 		String[][] studentData = new String[studenti.size()][7];
 		int i = 0;
-		for (Student sd : studenti) {
+		for (User sd : studenti) {
 			
 		
 	        String[] stdata = new String[7];
@@ -506,8 +508,8 @@ public class Controller {
 	        stdata[1] = sd.getName();
 	        stdata[2] = sd.getLastname();
 	        stdata[3] = Integer.toString(sd.getPoints());
-	        stdata[4] = Integer.toString(sd.getBadgesCount());
-	        stdata[5] = Integer.toString(sd.getExamCount());
+	        stdata[4] = Integer.toString(((Student) sd).getBadgesCount());
+	        stdata[5] = Integer.toString(((Student) sd).getExamCount());
 
 	        studentData[i++] = stdata;
 	    }

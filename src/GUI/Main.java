@@ -7,6 +7,8 @@ import javax.swing.JLabel;
 import badges.BadgeObserver;
 import main.Controller;
 import users.Student;
+import users.User;
+
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import java.util.List;
@@ -24,8 +26,8 @@ public class Main {
 	public Main(int idUser) {
 		initialize();
 		this.idUser = idUser;
-		List<Student> studenti = controller.deserialize("students.ser"); 
-		Student actUser = studenti.get(idUser);
+		List<User> studenti = controller.deserialize("students.ser"); 
+		Student actUser = (Student) studenti.get(idUser);
 		BadgeObserver badgeObserver = new BadgeObserver(actUser);
 		actUser.addObserver(badgeObserver);
 		frmMain.setVisible(true);

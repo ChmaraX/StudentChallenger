@@ -1,20 +1,11 @@
 package users;
-import java.io.Serializable;
-import java.util.Observable;
-
 import badges.Badge;
-import main.Points;
 
 
-public class Student extends Observable implements Serializable, Points{
+public class Student extends User{
 	
 
 	private static final long serialVersionUID = 1L;
-	private final String username;
-	private final String password;
-	private int age; 
-	private String name; 
-	private String lastname; 
 	private int points; 
 	private Badge[] badges = new Badge[100];
 	private int hotstreakCount;
@@ -39,31 +30,6 @@ public class Student extends Observable implements Serializable, Points{
 
 	}
 		
-	
-
-	public String getUsername() {
-		return username;
-	}
-
-
-	public String getPassword() {
-		return password;
-	}
-
-		
-	public int getAge() {
-		return age;
-	}
-	
-	
-	public String getName() {
-		return name;
-	}
-	
-
-	public String getLastname() {
-		return lastname;
-	}
 	
 	public void setSkillLevel(String level) {
 		this.skillLevel = level;
