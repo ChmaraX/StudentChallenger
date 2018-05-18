@@ -4,9 +4,16 @@
   <br>
 </h1>
 
-
 <p align="center">
-  This project was created as a part of university work on object oriented programming. The concept of this project was to create an e-learning software that will provide simple and effective education while stimulating and motivating students to reuse it trough simple principles of game, competition and progress rewards. User interface is designed in slovak language.
+<img src="https://img.shields.io/badge/verison-demo-blue.svg"/> 
+<a href="https://github.com/ChmaraX/logregform-android/issues"><img src="https://img.shields.io/github/issues/ChmaraX/logregform-android.svg"/></a>
+<img src="https://img.shields.io/badge/contributions-welcome-orange.svg"/>    
+<a href="https://github.com/ChmaraX/StudentChallenger/blob/master/LICENSE"><img src="https://img.shields.io/badge/license-MIT-blue.svg"></a>                                                                                                                                     </p>                                                                        
+                                                                                                                  
+
+          
+<p align="center">
+This project was created as a part of university work on object oriented programming. It's just <b>demo version</b> as a result there are some issues and bugs as well as lot of space to extend. The concept of this project was to create an e-learning software that will provide simple and effective education while stimulating and motivating students to reuse it trough simple principles of game, competition and progress rewards. User interface is designed in slovak language.
 </p>
 
 ## Description
