@@ -1,8 +1,6 @@
-# Student Challenger
-
 <h1 align="center">
   <br>
-   
+   <img src="https://raw.githubusercontent.com/ChmaraX/StudentChallenger/master/header.png" />
   <br>
 </h1>
 
