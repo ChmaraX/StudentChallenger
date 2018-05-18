@@ -1,30 +1,36 @@
-# StudentChallenger
+<h1 align="center">
+  <br>
+   
+  <br>
+</h1>
 
-<b>Zámer projektu:</b>
+# Student Challenger
 
-Zámer projektu je vytvoriť e-learning software, ktorý by umožnil študentom jednoduché a efektívne vzdelávanie sa, zároveň podnietil a motivoval študentov k opätovnému používaniu za pomoci jednoduchých princípov hry a súťaživosti.
-Študent si po vytvorení profilu zvolí predmet kde môže plniť úlohy a testy, tzv. výzvy. Úlohy a testy sú rôzne náročné a špecifikované (čas, nápovedy, multiple-choice...). Podľa obtiažnosti a úspešnosti riešenia sa študentovi pripisujú body, ktoré ho umiestňujú do celkového rebríčka všetkých študentov. Za plnenie špeciálnych či mimoriadne náročných úloh (napr. tri testy nad 95% po sebe) študent získava trofeje, ktoré sa mu taktiež pripisujú do profilu a ovplyvňujú poradie v rebríčku. V profile študenta sú zobrazené údaje ako skill-level študenta (začiatočník, pokročilý...), celkové body, odznaky, počet splnených úloh a testov, percentuálna úspešnosť v jednotlivých predmetoch, a mnohé iné. Získané trofeje či iné významné udalosti všetkých užívateľov budú vypisované v hlavnom menu.
-Výsledkom tohto projektu bude softvér ktorý posilní motiváciu k štúdiu za pomoci jednoduchých princípov hry a súťaživosti ako aj prehľad učiteľa o výsledkoch a výkone študentov, či jednoduchá implementácia nových testov a trofejí učiteľom.
+<p align="center">
+  This project was created as a part of university work on object oriented programming. The concept of this project was to create an e-learning software that will provide simple and effective education while stimulating and motivating students to reuse it trough simple principles of game, competition and progress rewards. User interface is designed in slovak language.
+</p>
+
+## Description
+After creating the profile, the student chooses a subject where he / she can perform tasks and exams, challenges. Tasks and exams are various challenging and specified (time, ordering, multiple-choice ...). Depending on the difficulty and the success of the solution, the student is awarded with points that contributes in the overall rankings of all students. With completing special or extraordinarily demanding tasks (eg three exam with no mistake consecutively), the student receives badges that are also attributed to the profile and affect ranking in the laddeboard. Student profile include stats as skill level (beginner, intermediate ...), total points, badges, number of completed tasks and exams and more. The result of this project will be software that will enhance motivation to study with simple game principles and competition, as well as a teacher's overview of student performance or simple implementation of new exams and badges by teachers.
 
 
-<b>Info k programu (pracovná verzia)</b>
+## Usage
 
-<b>Login.java</b> je spustac celeho programu.
+Using `javac Login.java ` will initialize the program at the Login interface. There you can register as a new user or login trough an existing account. Data are serialized locally for simplification.
 
-Registracia -> login 
-Vytvorenie vlastneho uctu
-( alebo ucet: admin/root )
+### Main menu
 
-Po vybrati prislusneho testu sa spusti test s otazkami.
-- Pri spravnej odpovedi sa uzivatelovi pripocita +1b
-- Pri zlej odpovedi sa zobrazi spravna odpoved +0b
-- po zodpovedani vsetkych otazok sa test vyhodnoti a uzivatelovi sa pripocitaju body popripade ziskane odznaky
+- <b>Exams</b>
+<br>Includes choosing an exam, option of timer (points multiplier x2), after pressing Start button the exam runs and you are promted to answer various questions. 
+The result is shown after completing the exam, including obtained points or badges. 
 
-Odznaky sleduje observer a ziskaju sa automaticky na zaklade splnenia podmienky pre dany odznak (napr. hotstreak)
+- <b>Profile</b>
+<br>Displays all information and stats about user. 
 
-V profile je sumar vsetkych udajov prisluchajucich danemu uzivatelovi.
+- <b>Ladderboard</b> 
+<br>Rankings of all students, sortable. 
 
-Ladderboard zobrazuje tabulku s udajmi vsetkych uzivatelov - sortable
+- <b>Create an exam</b>
+<br>Allows you to create exam, including choosing question type, wording of question and answer.
 
-Vytvorenie noveho testu, ciastnocne gui, zatial cez konzolu.
-
+> Every question has value of 1 point by default.
