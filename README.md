@@ -1,10 +1,11 @@
+# Student Challenger
+
 <h1 align="center">
   <br>
    
   <br>
 </h1>
 
-# Student Challenger
 
 <p align="center">
   This project was created as a part of university work on object oriented programming. The concept of this project was to create an e-learning software that will provide simple and effective education while stimulating and motivating students to reuse it trough simple principles of game, competition and progress rewards. User interface is designed in slovak language.
@@ -18,7 +19,7 @@ After creating the profile, the student chooses a subject where he / she can per
 
 Using `javac Login.java ` will initialize the program at the Login interface. There you can register as a new user or login trough an existing account. Data are serialized locally for simplification.
 
-### Main menu
+### User interface
 
 - <b>Exams</b>
 <br>Includes choosing an exam, option of timer (points multiplier x2), after pressing Start button the exam runs and you are promted to answer various questions. 
@@ -34,3 +35,10 @@ The result is shown after completing the exam, including obtained points or badg
 <br>Allows you to create exam, including choosing question type, wording of question and answer.
 
 > Every question has value of 1 point by default.
+
+## Structure of program
+  <img src="https://raw.githubusercontent.com/ChmaraX/StudentChallenger/master/UML.png" />
+  
+  ## License
+
+[MIT](LICENSE) © Adam Chmara
